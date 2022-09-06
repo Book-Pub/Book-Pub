@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { PaymentCart } from "../paymentCart/paymentCart.entity";
+import { Products } from "../products/products.entity";
 
 @Entity("cart")
 export class Cart {
@@ -16,8 +17,8 @@ export class Cart {
   @OneToMany(() => PaymentCart, (paymentCart) => paymentCart.cart)
   paymentCart: PaymentCart[];
 
-//   @OneToMany(() => Products, (products) => products.cart, { eager: true })
-//   products: Products[];
+  @OneToMany(() => Products, (products) => products.cart, { eager: true })
+  products: Products[];
 
   @Column({ type: "decimal", precision: 6, scale: 2, nullable: false })
   totalValue: number;
