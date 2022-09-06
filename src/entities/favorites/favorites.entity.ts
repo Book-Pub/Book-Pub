@@ -1,33 +1,45 @@
-import { CreateDateColumn,PrimaryColumn,Entity, OneToOne, JoinColumn, OneToMany } from "typeorm";
-import {v4 as uuid} from "uuid"
+import {
+  CreateDateColumn,
+  PrimaryColumn,
+  Entity,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  JoinTable,
+} from "typeorm";
+import { v4 as uuid } from "uuid";
+import { Ebooks } from "../ebooks/ebooks.entity";
+import { Products } from "../products/products.entity";
 
 @Entity("favorites")
-export class Favorites{
-    @PrimaryColumn("uuid")
-    id: string
+export class Favorites {
+  @PrimaryGeneratedColumn("uuid")
+  readonly id: string;
 
-    // @OneToOne(type => User,user => user.id,)
-    // @JoinColumn()
-    // user:User
+  @OneToMany(() => Ebooks, (ebooks) => ebooks.id, {
+    eager: true,
+    nullable: true,
+  })
+  @JoinTable()
+  ebooks: Ebooks;
 
-    // @OneToMany(type => Ebooks,ebooks => ebooks.id,{eager:true,nullable:true})
-    // @JoinColumn()
-    // ebooks: Ebooks
+  @OneToMany(() => Products, (products) => products.id, {
+    eager: true,
+    nullable: true,
+  })
+  @JoinTable()
+  products: Products;
 
-    // @OneToMany(type => Products,products => products.id,{eager:true,nullable:true})
-    // @JoinColumn()
-    // products: Products
+  @CreateDateColumn({ name: "created_at" })
+  createdAt: Date;
 
-    @CreateDateColumn({name:"createdAt"})
-    createdAt: Date
+  @CreateDateColumn({ name: "updated_at" })
+  updatedAt: Date;
 
-    @CreateDateColumn({name:"updatedAt"})
-    updatedAt: Date
-
-    constructor(){
-        if(!this.id){
-            this.id = uuid()
-        }
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
     }
+  }
 }
-

@@ -7,22 +7,23 @@ import {
   OneToMany,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Ebooks } from "../ebooks/ebooks.entity";
 
 @Entity("author")
 export class Author {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
-
-  @OneToMany(() => Ebooks, (ebooks) => ebooks.author)
-  ebooks: Ebooks[];
+  readonly id: string;
 
   @Column()
   name: string;
 
-  @CreateDateColumn()
+  @OneToMany(() => Ebooks, (ebooks) => ebooks.author)
+  ebooks: Ebooks[];
+
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
 
   constructor() {
