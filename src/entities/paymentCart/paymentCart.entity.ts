@@ -5,7 +5,9 @@ import {
   UpdateDateColumn,
   ManyToOne,
 } from "typeorm";
+
 import { Cart } from "../cart/cart.entity";
+import { Payment } from "../payment/payment.entity";
 
 @Entity("payment_cart")
 export class PaymentCart {

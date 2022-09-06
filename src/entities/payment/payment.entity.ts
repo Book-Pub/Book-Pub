@@ -8,19 +8,22 @@ import {
 } from "typeorm";
 import { PaymentCart } from "../paymentCart/paymentCart.entity";
 
-@Entity("cart")
-export class Cart {
+@Entity("payment")
+export class Payment {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @OneToMany(() => PaymentCart, (paymentCart) => paymentCart.cart)
-  paymentCart: PaymentCart[];
+  @Column({ name: "card_name", nullable: false })
+  cardName: string;
 
-//   @OneToMany(() => Products, (products) => products.cart, { eager: true })
-//   products: Products[];
+  @Column({ name: "security_code", nullable: true })
+  securityCode: number;
 
-  @Column({ type: "decimal", precision: 6, scale: 2, nullable: false })
-  totalValue: number;
+  @Column({ name: "expire_date", nullable: false })
+  expireDate: string;
+
+  @OneToMany(() => PaymentCart, (paymentCart) => paymentCart.payment)
+  paymentCart: PaymentCart;
 
   @CreateDateColumn({ name: "created_at", nullable: false })
   createdAt: Date;
