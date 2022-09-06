@@ -7,31 +7,23 @@ import {
   Column,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Author } from "../author/author.entity";
+import { Cart } from "../cart/cart.entity";
+import { Categories } from "../category/category.entity";
+import { Favorites } from "../favorites/favorites.entity";
 
 @Entity("Ebooks")
 export class Ebooks {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
-
-  @ManyToOne(() => Favorites, { eager: true })
-  favorites: Favorites;
-
-  @ManyToOne(() => Cart, { eager: true })
-  cart: Cart;
-
-  @ManyToOne(() => Author, { eager: true })
-  author: Author;
+  readonly id: string;
 
   @Column()
   name: string;
 
-  @ManyToOne(() => Categories, { eager: true })
-  categories: Categories;
-
-  @Column()
+  @Column({ name: "date_release" })
   dateRelease: string;
 
-  @Column()
+  @Column({ name: "book_cover" })
   bookCover: URL;
 
   @Column("decimal", { precision: 6, scale: 2 })
@@ -40,16 +32,16 @@ export class Ebooks {
   @Column()
   description: string;
 
-  @Column()
+  @Column({ name: "publishing_company" })
   publishingCompany: string;
 
   @Column()
   language: string;
 
-  @Column({ nullable: true })
+  @Column({ name: "edition_number", nullable: true })
   editionNumber: string;
 
-  @Column()
+  @Column({ name: "number_pages" })
   numberPages: string;
 
   @Column()
@@ -58,10 +50,22 @@ export class Ebooks {
   @Column()
   isbn: string;
 
-  @CreateDateColumn()
+  @ManyToOne(() => Favorites)
+  favorites: Favorites;
+
+  @ManyToOne(() => Cart)
+  cart: Cart;
+
+  @ManyToOne(() => Author, { eager: true })
+  author: Author;
+
+  @ManyToOne(() => Categories, { eager: true })
+  categories: Categories;
+
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
 
   constructor() {

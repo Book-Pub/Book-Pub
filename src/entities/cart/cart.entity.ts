@@ -6,8 +6,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { Ebooks } from "../ebooks/ebooks.entity";
 import { PaymentCart } from "../paymentCart/paymentCart.entity";
 import { Products } from "../products/products.entity";
+import { v4 as uuid } from "uuid";
 
 @Entity("cart")
 export class Cart {
@@ -20,12 +22,21 @@ export class Cart {
   @OneToMany(() => Products, (products) => products.cart, { eager: true })
   products: Products[];
 
-  @Column({ type: "decimal", precision: 6, scale: 2, nullable: false })
+  @OneToMany(() => Ebooks, (ebooks) => ebooks.cart, { eager: true })
+  ebooks: Ebooks[];
+
+  @Column({ name: "total_value", type: "decimal", precision: 6, scale: 2 })
   totalValue: number;
 
-  @CreateDateColumn({ name: "created_at", nullable: false })
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: "updated_at", nullable: false })
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
 }

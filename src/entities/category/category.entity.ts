@@ -4,21 +4,30 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
+import { Ebooks } from "../ebooks/ebooks.entity";
+import { Products } from "../products/products.entity";
 
-@Entity("category")
-export class Category {
+@Entity("categories")
+export class Categories {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
   @Column({ unique: true })
   name: string;
 
-  @CreateDateColumn()
+  @OneToMany(() => Ebooks, (ebooks) => ebooks.categories)
+  ebooks: Ebooks[];
+
+  @OneToMany(() => Products, (products) => products.categories)
+  products: Products[];
+
+  @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
 
   constructor() {
