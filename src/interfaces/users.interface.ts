@@ -7,17 +7,16 @@ export interface IAddressRequest {
 }
 
 export interface IPaymentRequest {
-  card_name?: string;
-  security_code?: number;
-  expire_date?: string;
+  cardName?: string;
+  securityCode?: number;
+  expireDate?: string;
 }
 
 export interface IUserRequest {
   name: string;
   email: string;
   password: string;
-  is_adm: boolean;
-  is_active: boolean;
+  isAdm: boolean;
   address: IAddressRequest;
-  payment: IPaymentRequest;
+  payment?: IPaymentRequest;
 }
