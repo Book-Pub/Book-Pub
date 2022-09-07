@@ -6,11 +6,6 @@ export interface IAddressRequest {
   state: string;
 }
 
-export interface IPaymentRequest {
-  cardName?: string;
-  securityCode?: number;
-  expireDate?: string;
-}
 
 export interface IUserRequest {
   name: string;
@@ -18,5 +13,4 @@ export interface IUserRequest {
   password: string;
   isAdm: boolean;
   address: IAddressRequest;
-  payment?: IPaymentRequest;
 }

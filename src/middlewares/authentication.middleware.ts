@@ -27,8 +27,9 @@ const handleAuthMiddleware = async (
       }
 
       req.user = {
-        isAdm: decoded.isAdm,
         id: decoded.id,
+        isAdm: decoded.isAdm,
+        isActive: decoded.isActive,
       };
 
       next();

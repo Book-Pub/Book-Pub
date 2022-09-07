@@ -12,7 +12,7 @@ import { Cart } from "../cart/cart.entity";
 import { Categories } from "../category/category.entity";
 import { Favorites } from "../favorites/favorites.entity";
 
-@Entity("Ebooks")
+@Entity("ebooks")
 export class Ebooks {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;

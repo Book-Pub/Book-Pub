@@ -2,10 +2,11 @@ import { Request, Response, NextFunction } from "express";
 
 import { SchemaOf } from "yup";
 import { AppError } from "../../errors/appError";
-import { IUserRequest } from "../../interfaces/users.interface";
+import { IUserLogin } from "../../interfaces/login.interface";
 
-export const handleSchemaUserCreate =
-  (schema: SchemaOf<IUserRequest>) =>
+
+export const handleSchemaLogin =
+  (schema: SchemaOf<IUserLogin>) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = req.body;
@@ -14,7 +15,7 @@ export const handleSchemaUserCreate =
         stripUnknown: true,
       });
 
-      req.newUser = validatedData;
+      req.login = validatedData
 
       next();
     } catch (err: any) {
