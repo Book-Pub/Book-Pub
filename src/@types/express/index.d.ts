@@ -1,4 +1,5 @@
 import * as express from "express";
+import { IUserRequest } from "../../interfaces/users.interface";
 
 declare global {
   namespace Express {
@@ -7,6 +8,7 @@ declare global {
         isAdm: boolean;
         id: string;
       };
+      newUser: IUserRequest;
     }
   }
 }
