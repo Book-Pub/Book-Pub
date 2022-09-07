@@ -17,7 +17,6 @@ export interface IUserRequest {
   email: string;
   password: string;
   is_adm: boolean;
-  is_active: boolean;
   address: IAddressRequest;
   payment: IPaymentRequest;
 }
