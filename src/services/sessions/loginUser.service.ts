@@ -1,8 +1,7 @@
-import AppDataSource from "../../data-source";
 import { compare } from "bcrypt";
 import { AppError } from "../../errors/appError";
 import { IUserLogin } from "../../interfaces/login.interface";
-import { User } from "../../entities/users/user.entity";
+
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 import { userRepository } from "../../utils/repositories";
