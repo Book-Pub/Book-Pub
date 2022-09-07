@@ -6,6 +6,7 @@ export interface IAddressRequest {
   state: string;
 }
 
+
 export interface IUserRequest {
   name: string;
   email: string;
