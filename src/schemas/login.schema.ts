@@ -1,5 +1,4 @@
 import * as yup from "yup";
-
 import { SchemaOf } from "yup";
 import { IUserLogin } from "../interfaces/login.interface";
 
