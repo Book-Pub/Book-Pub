@@ -24,7 +24,7 @@ export class Ebooks {
   dateRelease: string;
 
   @Column({ name: "book_cover" })
-  bookCover: URL;
+  bookCover: string;
 
   @Column("decimal", { precision: 6, scale: 2 })
   value: number;
