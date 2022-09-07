@@ -7,7 +7,7 @@ const AppDataSource = new DataSource(
         type: "sqlite",
         database: ":memory:",
         synchronize: true,
-        entities: ["src/entities/*.ts"],
+        entities: ["src/entities/**/*.ts"],
       }
     : {
         type: "postgres",
@@ -18,8 +18,8 @@ const AppDataSource = new DataSource(
         database: process.env.DB,
         logging: true,
         synchronize: false,
-        entities: ["src/entities/*.ts"],
-        migrations: ["src/migrations/*.ts"],
+        entities: ["src/entities/**/*.ts"],
+        migrations: ["src/migrations/**/*.ts"],
       }
 );
 
