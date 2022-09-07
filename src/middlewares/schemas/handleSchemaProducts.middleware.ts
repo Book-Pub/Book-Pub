@@ -2,10 +2,10 @@ import { Request, Response, NextFunction } from "express";
 
 import { SchemaOf } from "yup";
 import { AppError } from "../../errors/appError";
-import { IUserRequest } from "../../interfaces/users.interface";
+import { IProductsRequest } from "../../interfaces/products.interface";
 
-export const handleSchemaUserCreate =
-  (schema: SchemaOf<IUserRequest>) =>
+export const handleSchemaProducts =
+  (schema: SchemaOf<IProductsRequest>) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const data = req.body;
@@ -14,7 +14,7 @@ export const handleSchemaUserCreate =
         stripUnknown: true,
       });
 
-      req.newUser = validatedData;
+      req.products = validatedData
 
       next();
     } catch (err: any) {
