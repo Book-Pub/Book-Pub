@@ -1,5 +1,6 @@
 import { Router } from "express";
 import createEbooksController from "../../controller/ebooks/createEbooks.controller";
+import deleteEbookController from "../../controller/ebooks/deleteEbook.controller";
 import listEbookByIdController from "../../controller/ebooks/listEbookById.controller";
 import listEbooksController from "../../controller/ebooks/listEbooks.controller";
 import updateEbookController from "../../controller/ebooks/updateEbook.controller";
@@ -22,6 +23,11 @@ eBooksRoutes.patch(
   adminAuthMiddleware,
   updateEbookController
 ); // atualizar dados do livro -- SO ADMIN
-eBooksRoutes.delete("/:id", handleAuthMiddleware, adminAuthMiddleware); // excluir livros -- SO ADMIN
+eBooksRoutes.delete(
+  "/:id",
+  handleAuthMiddleware,
+  adminAuthMiddleware,
+  deleteEbookController
+); // excluir livros -- SO ADMIN
 
 export default eBooksRoutes;
