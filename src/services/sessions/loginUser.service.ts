@@ -29,8 +29,9 @@ const loginUserService = async ({
   const token = jwt.sign(
     {
       isAdm: user.isAdm,
+      isActive: user.isActive,
     },
-    "SECRET_KEY",
+    process.env.SECRET_KEY as string,
     { subject: user.id, expiresIn: "24h" }
   );
   return token;
