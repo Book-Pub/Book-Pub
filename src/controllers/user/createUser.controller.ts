@@ -11,9 +11,7 @@ const createUserController = async (req: Request, res: Response) => {
     password,
     isAdm,
   });
-    const { name, email, address, password, isAdm } = req.newUser
-    const user = await createUserService({ name, email, address, password, isAdm })
-
+// marco
   return res.status(201).json(instanceToPlain(user));
 };
 export default createUserController;

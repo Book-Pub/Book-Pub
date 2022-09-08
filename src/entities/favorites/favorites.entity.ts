@@ -3,7 +3,7 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
-  JoinTable,
+  JoinColumn,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Ebooks } from "../ebooks/ebooks.entity";
@@ -18,14 +18,14 @@ export class Favorites {
     eager: true,
     nullable: true,
   })
-  @JoinTable()
+  @JoinColumn()
   ebooks: Ebooks;
 
   @OneToMany(() => Products, (products) => products.id, {
     eager: true,
     nullable: true,
   })
-  @JoinTable()
+  @JoinColumn()
   products: Products;
 
   @CreateDateColumn({ name: "created_at" })
