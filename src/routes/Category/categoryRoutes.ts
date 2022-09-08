@@ -1,5 +1,10 @@
 import { Router } from "express";
-import createEbooksController from "../../controller/ebooks/createEbooks.controller";
+
+import createCategoryController from "../../controllers/categories/createCategory.controller";
+import deleteCategoryController from "../../controllers/categories/deleteCategory.controller";
+import listAllCategoriesController from "../../controllers/categories/listAllCategories.controller";
+import listProductsOfCategoryController from "../../controllers/categories/listProductsOfCategory.controller";
+import updateCategoryController from "../../controllers/categories/updateCategory.controller";
 import adminAuthMiddleware from "../../middlewares/adminVerification.middleware";
 import handleAuthMiddleware from "../../middlewares/authentication.middleware";
 
@@ -9,12 +14,22 @@ categoriesRoutes.post(
   "",
   handleAuthMiddleware,
   adminAuthMiddleware,
-  createEbooksController
+  createCategoryController
 ); //cadastrar uma Category -- SO ADMIN
 
-categoriesRoutes.get(""); //listar todas as categorias
-categoriesRoutes.get("/:id/products"); //listar produtos de uma categoria
-categoriesRoutes.patch("/:id", handleAuthMiddleware, adminAuthMiddleware); // atualizar Categorias -- SO ADMIN
-categoriesRoutes.delete("/:id", handleAuthMiddleware, adminAuthMiddleware); // deletar categorias -- ADMIN
+categoriesRoutes.get("", listAllCategoriesController); //listar todas as categorias
+categoriesRoutes.get("/:id/products", listProductsOfCategoryController); //listar produtos de uma categoria
+categoriesRoutes.patch(
+  "/:id",
+  handleAuthMiddleware,
+  adminAuthMiddleware,
+  updateCategoryController
+); // atualizar Categorias -- SO ADMIN
+categoriesRoutes.delete(
+  "/:id",
+  handleAuthMiddleware,
+  adminAuthMiddleware,
+  deleteCategoryController
+); // deletar categorias -- ADMIN
 
 export default categoriesRoutes;
