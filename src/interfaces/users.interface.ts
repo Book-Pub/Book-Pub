@@ -14,3 +14,10 @@ export interface IUserRequest {
   isAdm: boolean;
   address: IAddressRequest;
 }
+
+
+export interface IUserUpdate {
+    name?: string;
+    email?: string;
+    password?: string;
+}
