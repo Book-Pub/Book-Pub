@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import createEbooksController from "../../controllers/ebooks/createEbooks.controller";
 import deleteEbookController from "../../controllers/ebooks/deleteEbook.controller";
 import listEbookByIdController from "../../controllers/ebooks/listEbookById.controller";
@@ -7,10 +8,14 @@ import updateEbookController from "../../controllers/ebooks/updateEbook.controll
 import adminAuthMiddleware from "../../middlewares/adminVerification.middleware";
 import handleAuthMiddleware from "../../middlewares/authentication.middleware";
 
+import { handleSchemaEbooks } from "../../middlewares/schemas/handleSchemaebooks.middleware";
+import { ebooksRequestSchema } from "../../schemas/ebooks.schema";
+
 const eBooksRoutes = Router();
 
 eBooksRoutes.post(
   "",
+  handleSchemaEbooks(ebooksRequestSchema),
   handleAuthMiddleware,
   adminAuthMiddleware,
   createEbooksController
