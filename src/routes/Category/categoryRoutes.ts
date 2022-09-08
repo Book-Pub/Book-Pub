@@ -1,5 +1,5 @@
 import { Router } from "express";
-import createEbooksController from "../../controller/Ebooks/createEbooks.controller";
+import createEbooksController from "../../controller/ebooks/createEbooks.controller";
 import adminAuthMiddleware from "../../middlewares/adminVerification.middleware";
 import handleAuthMiddleware from "../../middlewares/authentication.middleware";
 
