@@ -1,12 +1,17 @@
 import { Router } from "express";
+
 import createEbooksController from "../../controllers/ebooks/createEbooks.controller";
 import adminAuthMiddleware from "../../middlewares/adminVerification.middleware";
 import handleAuthMiddleware from "../../middlewares/authentication.middleware";
+
+import { handleSchemaCategories } from "../../middlewares/schemas/handleSchemaCategories.middleware";
+import { categoriesRequestSchema } from "../../schemas/categories.schema";
 
 const categoriesRoutes = Router();
 
 categoriesRoutes.post(
   "",
+  handleSchemaCategories(categoriesRequestSchema),
   handleAuthMiddleware,
   adminAuthMiddleware,
   createEbooksController
