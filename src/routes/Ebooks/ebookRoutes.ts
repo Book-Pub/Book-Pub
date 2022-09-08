@@ -1,9 +1,9 @@
 import { Router } from "express";
-import createEbooksController from "../../controller/ebooks/createEbooks.controller";
-import deleteEbookController from "../../controller/ebooks/deleteEbook.controller";
-import listEbookByIdController from "../../controller/ebooks/listEbookById.controller";
-import listEbooksController from "../../controller/ebooks/listEbooks.controller";
-import updateEbookController from "../../controller/ebooks/updateEbook.controller";
+import createEbooksController from "../../controllers/ebooks/createEbooks.controller";
+import deleteEbookController from "../../controllers/ebooks/deleteEbook.controller";
+import listEbookByIdController from "../../controllers/ebooks/listEbookById.controller";
+import listEbooksController from "../../controllers/ebooks/listEbooks.controller";
+import updateEbookController from "../../controllers/ebooks/updateEbook.controller";
 import adminAuthMiddleware from "../../middlewares/adminVerification.middleware";
 import handleAuthMiddleware from "../../middlewares/authentication.middleware";
 

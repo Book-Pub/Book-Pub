@@ -4,6 +4,7 @@ import { IUserLogin } from "../../interfaces/login.interface";
 import { IPaymentRequest } from "../../interfaces/payment.interface";
 import { IProductsRequest } from "../../interfaces/products.interface";
 import { IUserRequest } from "../../interfaces/users.interface";
+import { IFavoritesRequest } from "../../interfaces/favorites.interface";
 
 declare global {
   namespace Express {
@@ -17,6 +18,7 @@ declare global {
       newUser: IUserRequest;
       products: IProductsRequest;
       payment: IPaymentRequest;
+      favorites: IFavoritesRequest
     }
   }
 }
