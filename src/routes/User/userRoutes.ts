@@ -1,6 +1,6 @@
 import { Router } from "express";
-import createUserController from "../../controllers/user/createUser.controller";
-import listUsersController from "../../controllers/user/listUsers.controller";
+import createUserController from "../../controller/user/createUser.controller";
+import listUsersController from "../../controller/user/listUsers.controller";
 import adminAuthMiddleware from "../../middlewares/adminVerification.middleware";
 import handleAuthMiddleware from "../../middlewares/authentication.middleware";
 

@@ -3,23 +3,20 @@ import { addressRepository, paymentRepository, userRepository } from "../../util
 import bcryptjs from "bcryptjs";
 import { AppError } from "../../errors/appError";
 
-const createUserService = async ({ name, email, address, password, isAdm, payment }: IUserRequest) => {
+const createUserService = async ({ name, email, address, password, isAdm }: IUserRequest) => {
     const hashPassword = bcryptjs.hashSync(password, 10);
     const userExists = await userRepository.findOne({ where: { email: email } })
     
     if (userExists){
         throw new AppError(400, "User already exists")
     }
-    if (payment) {
-        paymentRepository.create({ ...payment })
-    }
+    
     addressRepository.create({ ...address })
     const user = userRepository.create({
         name,
         email,
         address,
         password: hashPassword,
-        payment,
         isAdm
     });
 
