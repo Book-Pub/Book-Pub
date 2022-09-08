@@ -8,6 +8,10 @@ import updateEbookController from "../../controllers/ebooks/updateEbook.controll
 import adminAuthMiddleware from "../../middlewares/adminVerification.middleware";
 import handleAuthMiddleware from "../../middlewares/authentication.middleware";
 
+import { handleSchemaEbooks } from "../../middlewares/schemas/handleSchemaEbooks.middleware";
+import { ebooksRequestSchema } from "../../schemas/ebooks.schema";
+
+
 const eBooksRoutes = Router();
 
 eBooksRoutes.post(
