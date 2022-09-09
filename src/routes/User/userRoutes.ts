@@ -1,6 +1,7 @@
 import { Router } from "express";
 import createUserController from "../../controllers/user/createUser.controller";
 import deleteUserController from "../../controllers/user/deleteUser.controller";
+import getOneUserController from "../../controllers/user/getOneUser.controller";
 import listUsersController from "../../controllers/user/listUsers.controller";
 import updateUserController from "../../controllers/user/updateUser.controller";
 import updateUserAddressController from "../../controllers/user/updateUserAddress.comtroller";
@@ -24,9 +25,19 @@ userRoutes.get(
   adminAuthMiddleware,
   listUsersController
 ); //listar todos os usuarios - SÓ ADMIN
-userRoutes.delete("/:id", handleAuthMiddleware, adminAuthMiddleware, deleteUserController); // deletar usuario - softdelete - SÓ ADMIN
+userRoutes.get("/profile/:id", handleAuthMiddleware, getOneUserController);
+userRoutes.delete(
+  "/:id",
+  handleAuthMiddleware,
+  adminAuthMiddleware,
+  deleteUserController
+); // deletar usuario - softdelete - SÓ ADMIN
 userRoutes.patch("/:id", handleAuthMiddleware, updateUserController);
 
-userRoutes.patch("/:id/address",  updateUserAddressController); // atualizar endereço de usuario
+userRoutes.patch(
+  "/:id/address",
+  handleAuthMiddleware,
+  updateUserAddressController
+); // atualizar endereço de usuario
 
 export default userRoutes;
