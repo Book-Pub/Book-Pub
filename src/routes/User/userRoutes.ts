@@ -24,9 +24,14 @@ userRoutes.get(
   adminAuthMiddleware,
   listUsersController
 ); //listar todos os usuarios - SÓ ADMIN
-userRoutes.delete("/:id", handleAuthMiddleware, adminAuthMiddleware, deleteUserController); // deletar usuario - softdelete - SÓ ADMIN
+userRoutes.delete(
+  "/:id",
+  handleAuthMiddleware,
+  adminAuthMiddleware,
+  deleteUserController
+); // deletar usuario - softdelete - SÓ ADMIN
 userRoutes.patch("/:id", handleAuthMiddleware, updateUserController);
 
-userRoutes.patch("/:id/address",  updateUserAddressController); // atualizar endereço de usuario
+userRoutes.patch("/:id/address", updateUserAddressController); // atualizar endereço de usuario
 
 export default userRoutes;

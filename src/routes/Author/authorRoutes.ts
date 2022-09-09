@@ -2,8 +2,9 @@ import { Router } from "express";
 import createAuthorController from "../../controllers/authors/createAuthor.controller";
 import deleteAuthorController from "../../controllers/authors/deleteAuthor.controller";
 import listAuthorsController from "../../controllers/authors/listAuthors.controller";
-import listEbooksbyAuthorController from "../../controllers/authors/listBooksByAuthor.controller";
 import authorUpdateController from "../../controllers/authors/updateAuthor.controller";
+import listEbookByIdController from "../../controllers/ebooks/listEbookById.controller";
+
 import adminAuthMiddleware from "../../middlewares/adminVerification.middleware";
 import handleAuthMiddleware from "../../middlewares/authentication.middleware";
 
@@ -14,18 +15,15 @@ const authorRoutes = Router();
 
 authorRoutes.post(
   "",
-
+  handleSchemaAuthor(authorRequestSchema),
   handleAuthMiddleware,
   adminAuthMiddleware,
   createAuthorController
 ); //cadastrar um Autor -- SO ADMIN
 
-
 authorRoutes.get("", listAuthorsController); //listar todos os Autores
 
-
-authorRoutes.get("/:id/books", listEbooksbyAuthorController); //listar os livros do autor -- ID DO AUTOR
-
+authorRoutes.get("/:id/books", listEbookByIdController); //listar os livros do autor -- ID DO AUTOR
 
 authorRoutes.patch(
   "/:id",
@@ -34,20 +32,11 @@ authorRoutes.patch(
   authorUpdateController
 ); // atualizar autor -- SO ADMIN
 
-
 authorRoutes.delete(
   "/:id",
   handleAuthMiddleware,
   adminAuthMiddleware,
   deleteAuthorController
 ); // deletar autor -- SO ADMIN
-
-
-
-  handleSchemaAuthor(authorRequestSchema),
-  handleAuthMiddleware,
-  adminAuthMiddleware
-); //cadastrar um Autor -- SO ADMIN
-
 
 export default authorRoutes;
