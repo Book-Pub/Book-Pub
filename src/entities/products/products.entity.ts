@@ -29,7 +29,7 @@ export class Products {
   favorites: Favorites;
 
   @ManyToOne(() => Categories)
-  categories: Categories;
+  categories: string;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
