@@ -20,12 +20,9 @@ authorRoutes.post(
   createAuthorController
 ); //cadastrar um Autor -- SO ADMIN
 
-
 authorRoutes.get("", listAuthorsController); //listar todos os Autores
 
-
 authorRoutes.get("/:id/books", listEbooksbyAuthorController); //listar os livros do autor -- ID DO AUTOR
-
 
 authorRoutes.patch(
   "/:id",
@@ -34,7 +31,6 @@ authorRoutes.patch(
   authorUpdateController
 ); // atualizar autor -- SO ADMIN
 
-
 authorRoutes.delete(
   "/:id",
   handleAuthMiddleware,
@@ -42,12 +38,8 @@ authorRoutes.delete(
   deleteAuthorController
 ); // deletar autor -- SO ADMIN
 
-
-
-  handleSchemaAuthor(authorRequestSchema),
+handleSchemaAuthor(authorRequestSchema),
   handleAuthMiddleware,
-  adminAuthMiddleware
-); //cadastrar um Autor -- SO ADMIN
-
+  adminAuthMiddleware; //cadastrar um Autor -- SO ADMIN
 
 export default authorRoutes;

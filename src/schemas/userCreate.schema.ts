@@ -9,6 +9,7 @@ export const userRequestSchema: SchemaOf<IUserRequest> = yup.object().shape({
   isAdm: yup.boolean().required(),
 
   address: yup.object().shape({
+    streetName: yup.string().required(),
     district: yup.string().required(),
     zipCode: yup.string().required(),
     number: yup.string().required(),

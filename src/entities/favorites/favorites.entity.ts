@@ -14,14 +14,14 @@ export class Favorites {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @OneToMany(() => Ebooks, (ebooks) => ebooks.id, {
+  @OneToMany(() => Ebooks, (ebooks) => ebooks.favorites, {
     eager: true,
     nullable: true,
   })
   @JoinColumn()
   ebooks: Ebooks;
 
-  @OneToMany(() => Products, (products) => products.id, {
+  @OneToMany(() => Products, (products) => products.favorites, {
     eager: true,
     nullable: true,
   })
