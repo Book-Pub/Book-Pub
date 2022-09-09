@@ -21,3 +21,13 @@ export interface IUserUpdate {
     email?: string;
     password?: string;
 }
+
+
+export interface IAddressUpdate {
+    streetName?: string
+    district?: string
+    number?: string
+    zipCode?: string
+    city?: string
+    state?: string
+}
