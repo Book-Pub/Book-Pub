@@ -9,6 +9,6 @@ export const productsRequestSchema: SchemaOf<IProductsRequest> = yup
   .shape({
     name: yup.string().required(),
     value: yup.number().required(),
-    categoryId: yup.string().required(),
-    favoriteId: yup.string().required(),
+    category: yup.string().required(),
+    favorite: yup.string().required(),
   });
