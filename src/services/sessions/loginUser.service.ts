@@ -31,7 +31,7 @@ const loginUserService = async ({
       isAdm: user.isAdm,
       isActive: user.isActive,
     },
-    process.env.SECRET_KEY as string,
+    (process.env.SECRET_KEY as string) || "SECRET_KEY",
     { subject: user.id, expiresIn: "24h" }
   );
   return token;
