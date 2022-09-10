@@ -7,11 +7,11 @@ const createProductsService = async (
     {
     name,
     value,
-    categoryId,
-    favoriteId
+    category,
+    favorite
     }:IProductsRequest
     ) => {
-        if(!name||!value||!categoryId||!favoriteId){
+        if(!name||!value||!category||!favorite){
             throw new AppError(400,"Information required for registration is missing")
         }
         const findProduct = await productsRepository.findOneBy({name:name})
@@ -22,8 +22,8 @@ const createProductsService = async (
 
         const ProductsList = await productsRepository.find()
         
-        const findCategory = ProductsList.find(elem => elem.categories === categoryId)
-        const findFavorites = ProductsList.find(elem => elem.favorites.id === favoriteId)
+        const findCategory = ProductsList.find(elem => elem.categories === category)
+        const findFavorites = ProductsList.find(elem => elem.favorites.id === favorite)
         
         if(!findCategory){
             throw new AppError(400,"Category does not exists")
@@ -34,7 +34,7 @@ const createProductsService = async (
         const newProduct = new Products
         newProduct.name = name
         newProduct.value = value
-        newProduct.categories = categoryId
+        newProduct.categories = category
         
         productsRepository.create(newProduct)
 
