@@ -9,7 +9,6 @@ const updateEbookController = async (req: Request, res: Response) => {
   const updatedEbook = await updateEbookService(id, data);
 
   return res.status(200).json({
-    message: "Ebook Updated",
     updatedEbook,
   });
 };

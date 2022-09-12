@@ -1,24 +1,26 @@
 import {
-  PrimaryGeneratedColumn,
-  Column,
   Entity,
+  PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  OneToOne,
   OneToMany,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Ebooks } from "../ebooks/ebooks.entity";
+import { Order } from "../order/order.entity";
 
-@Entity("author")
-export class Author {
+@Entity("order_ebooks")
+export class OrderEbooks {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  readonly id: string;
 
-  @Column()
-  name: string;
+  @ManyToOne(() => Order)
+  order: Order;
 
-  @OneToMany(() => Ebooks, (ebooks) => ebooks.author)
-  ebooks: Ebooks[];
+  @OneToMany(() => Ebooks, (ebooks) => ebooks.orderEbooks)
+  ebooks: Ebooks;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

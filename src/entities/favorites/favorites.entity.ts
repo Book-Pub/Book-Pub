@@ -4,10 +4,11 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
   JoinColumn,
+  OneToOne,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Ebooks } from "../ebooks/ebooks.entity";
-import { Products } from "../products/products.entity";
+import { User } from "../users/user.entity";
 
 @Entity("favorites")
 export class Favorites {
@@ -21,12 +22,9 @@ export class Favorites {
   @JoinColumn()
   ebooks: Ebooks;
 
-  @OneToMany(() => Products, (products) => products.favorites, {
-    eager: true,
-    nullable: true,
-  })
+  @OneToOne(() => User, { eager: true })
   @JoinColumn()
-  products: Products;
+  user: string;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
