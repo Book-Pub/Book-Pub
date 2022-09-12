@@ -5,6 +5,8 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   Column,
+  JoinColumn,
+  OneToMany,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Author } from "../author/author.entity";
@@ -54,7 +56,8 @@ export class Ebooks {
   @ManyToOne(() => Favorites)
   favorites: Favorites;
 
-  @ManyToOne(() => OrderEbooks)
+  @OneToMany(() => OrderEbooks, (orderEbooks) => orderEbooks.ebooks, { eager: true })
+  @JoinColumn()
   orderEbooks: OrderEbooks;
 
   @ManyToOne(() => Author, { eager: true })

@@ -12,7 +12,6 @@ import {
 import { v4 as uuid } from "uuid";
 import { Address } from "../address/address.entity";
 import { Favorites } from "../favorites/favorites.entity";
-import { Payment } from "../payment/payment.entity";
 import { Order } from "../order/order.entity";
 
 @Entity("users")
@@ -46,11 +45,12 @@ export class User {
   @JoinColumn()
   address: Address;
 
-  @OneToOne(() => Favorites)
+  @OneToMany(() => Favorites, (favorites) => favorites.user)
   @JoinColumn()
   favorites: Favorites;
 
   @OneToMany(() => Order, (order) => order.user)
+  @JoinColumn()
   order: Order;
 
   constructor() {

@@ -5,12 +5,12 @@ import { Categories } from "../entities/category/category.entity";
 import { Ebooks } from "../entities/ebooks/ebooks.entity";
 import { Favorites } from "../entities/favorites/favorites.entity";
 import { Payment } from "../entities/payment/payment.entity";
-import { PaymentCart } from "../entities/paymentCart/paymentCart.entity";
+// import { PaymentCart } from "../entities/paymentCart/paymentCart.entity";
 import { User } from "../entities/users/user.entity";
 import { Order } from "../entities/order/order.entity";
 
 const userRepository = AppDataSource.getRepository(User);
-const paymentCartRepository = AppDataSource.getRepository(PaymentCart);
+// const paymentCartRepository = AppDataSource.getRepository(PaymentCart);
 const paymentRepository = AppDataSource.getRepository(Payment);
 const favoritesRepository = AppDataSource.getRepository(Favorites);
 const ebooksRepository = AppDataSource.getRepository(Ebooks);
@@ -21,7 +21,7 @@ const addressRepository = AppDataSource.getRepository(Address);
 
 export {
   userRepository,
-  paymentCartRepository,
+  // paymentCartRepository,
   paymentRepository,
   favoritesRepository,
   ebooksRepository,

@@ -5,6 +5,8 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
   OneToOne,
+  ManyToMany,
+  ManyToOne,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Ebooks } from "../ebooks/ebooks.entity";
@@ -22,9 +24,8 @@ export class Favorites {
   @JoinColumn()
   ebooks: Ebooks;
 
-  @OneToOne(() => User, { eager: true })
-  @JoinColumn()
-  user: string;
+  @ManyToOne(() => User, { eager: true })
+  user: User;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
