@@ -3,7 +3,6 @@ import { AppError } from "../../errors/appError";
 import { ICategoryIDRequest } from "../../interfaces/categories.interface";
 import {
   categoriesRepository,
-  ebooksRepository,
 } from "../../utils/repositories";
 
 const listProductsOfCategoryService = async ({
@@ -25,7 +24,6 @@ const listProductsOfCategoryService = async ({
     },
     relations: {
       ebooks: true,
-      products: true,
     },
   });
 

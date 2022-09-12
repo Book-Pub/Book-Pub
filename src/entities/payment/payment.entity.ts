@@ -2,14 +2,11 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
   JoinColumn,
   OneToOne,
 } from "typeorm";
-import { PaymentCart } from "../paymentCart/paymentCart.entity";
 import { v4 as uuid } from "uuid";
 import { User } from "../users/user.entity";
 
