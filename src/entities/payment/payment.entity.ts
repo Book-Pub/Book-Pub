@@ -5,9 +5,11 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from "typeorm";
 import { PaymentCart } from "../paymentCart/paymentCart.entity";
 import { v4 as uuid } from "uuid";
+import { User } from "../users/user.entity";
 
 @Entity("payment")
 export class Payment {
@@ -17,14 +19,17 @@ export class Payment {
   @Column({ name: "card_name" })
   cardName: string;
 
-  @Column({ name: "security_code", nullable: true })
-  securityCode: number;
+  @Column({name:"number_card"})
+  numberCard: string
 
   @Column({ name: "expire_date" })
   expireDate: string;
 
   @OneToMany(() => PaymentCart, (paymentCart) => paymentCart.payment)
   paymentCart: PaymentCart;
+
+  @ManyToOne(type => User, user => user.id)
+  userId: string;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
