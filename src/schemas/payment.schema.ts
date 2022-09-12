@@ -7,10 +7,11 @@ import { IPaymentRequest } from "../interfaces/payment.interface";
 export const paymentRequestSchema: SchemaOf<IPaymentRequest> = yup
   .object()
   .shape({
-    cardName: yup.string().required("Card_name is not a required fild"),
+    cardName: yup.string().required("Card Name is a required field"),
+    numberCard: yup.string().required("Number Card is a required field"),
     securityCode: yup
-      .number()
+      .string()
       .max(3)
-      .required("Security_code is not a required fild"),
-    expireDate: yup.string().required("Expire_date is not a required fild"),
+      .required("Security Code is a required field"),
+    expireDate: yup.string().required("Expire Date is a required field")
   });
