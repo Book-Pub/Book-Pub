@@ -1,6 +1,6 @@
 import { Express } from "express";
 import authorRoutes from "./Author/authorRoutes";
-import cartRoutes from "./Cart/cartRoutes";
+import orderRoutes from "./Order/orderRoutes";
 import categoriesRoutes from "./Category/categoryRoutes";
 import eBooksRoutes from "./Ebooks/ebookRoutes";
 import favoritesRoutes from "./Favorites/favoritesRoutes";
@@ -15,6 +15,6 @@ export const appRoutes = (app: Express) => {
   app.use("/favorites", favoritesRoutes);
   app.use("/ebooks", eBooksRoutes);
   app.use("/categories", categoriesRoutes);
-  app.use("/cart", cartRoutes);
+  app.use("/order", orderRoutes);
   app.use("/authors", authorRoutes);
 };
