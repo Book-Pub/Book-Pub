@@ -5,17 +5,18 @@ import {
   UpdateDateColumn,
   ManyToOne,
 } from "typeorm";
-import { Cart } from "../cart/cart.entity";
+
 import { Payment } from "../payment/payment.entity";
 import { v4 as uuid } from "uuid";
+import { Order } from "../order/order.entity";
 
 @Entity("payment_cart")
 export class PaymentCart {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @ManyToOne(() => Cart)
-  cart: Cart;
+  @ManyToOne(() => Order)
+  order: Order;
 
   @ManyToOne(() => Payment)
   payment: Payment;

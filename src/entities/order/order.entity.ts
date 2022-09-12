@@ -6,30 +6,25 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
-  JoinColumn,
-  OneToOne,
 } from "typeorm";
-import { PaymentCart } from "../paymentCart/paymentCart.entity";
+
 import { v4 as uuid } from "uuid";
 import { User } from "../users/user.entity";
+import { OrderEbooks } from "../orderBooks/orderEbooks.entity";
 
-@Entity("payment")
-export class Payment {
+@Entity("order")
+export class Order {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @OneToOne(() => User, { eager: true })
-  @JoinColumn()
-  user: string;
+  @OneToMany(() => OrderEbooks, (orderEbooks) => orderEbooks.order)
+  orderEbooks: OrderEbooks;
 
-  @Column({ name: "card_name" })
-  cardName: string;
+  @ManyToOne(() => User)
+  user: User;
 
-  @Column({ name: "number_card" })
-  numberCard: string;
-
-  @Column({ name: "expire_date" })
-  expireDate: string;
+  @Column({ default: "Order Created" })
+  status: string;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

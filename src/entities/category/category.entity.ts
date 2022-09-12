@@ -8,7 +8,6 @@ import {
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Ebooks } from "../ebooks/ebooks.entity";
-import { Products } from "../products/products.entity";
 
 @Entity("categories")
 export class Categories {
@@ -20,9 +19,6 @@ export class Categories {
 
   @OneToMany(() => Ebooks, (ebooks) => ebooks.categories)
   ebooks: Ebooks[];
-
-  @OneToMany(() => Products, (products) => products.categories)
-  products: Products[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

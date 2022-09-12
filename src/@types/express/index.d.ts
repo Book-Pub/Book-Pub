@@ -20,7 +20,6 @@ declare global {
       };
       login: IUserLogin;
       newUser: IUserRequest;
-      products: IProductsRequest;
       payment: IPaymentRequest;
       favorites: IFavoritesRequest;
       ebooks: IBookRequest;

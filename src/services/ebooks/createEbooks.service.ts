@@ -21,7 +21,7 @@ const createEbooksService = async ({
   numberPages,
   country,
   isbn,
-}: IBookRequest): Promise<Ebooks> => {
+}: IBookRequest) => {
   if (
     !author ||
     !name ||
@@ -41,7 +41,7 @@ const createEbooksService = async ({
   const authorAlreadyExists = await authorRepository.findOneBy({ id: author });
 
   if (!authorAlreadyExists) {
-    throw new AppError(404, "Author doesnt exists");
+    throw new AppError(400, "Author doesnt exists");
   }
 
   const categoryExists = await categoriesRepository.findOneBy({ id: category });

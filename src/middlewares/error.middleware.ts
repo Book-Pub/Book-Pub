@@ -5,7 +5,7 @@ export const HandleErrorMiddleware = (
   err: Error,
   request: Request,
   response: Response,
-  _: NextFunction
+  next: NextFunction
 ) => {
   if (err instanceof AppError) {
     return response.status(err.statusCode).json({
