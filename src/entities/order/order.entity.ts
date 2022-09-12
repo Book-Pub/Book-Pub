@@ -2,10 +2,12 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  OneToOne,
+  JoinColumn,
+  OneToMany,
 } from "typeorm";
 
 import { v4 as uuid } from "uuid";
@@ -18,9 +20,10 @@ export class Order {
   readonly id: string;
 
   @OneToMany(() => OrderEbooks, (orderEbooks) => orderEbooks.order)
-  orderEbooks: OrderEbooks;
+  @JoinColumn()
+  orderEbooks: OrderEbooks[];
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { eager: true })
   user: User;
 
   @Column({ default: "Order Created" })

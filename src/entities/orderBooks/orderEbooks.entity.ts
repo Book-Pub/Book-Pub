@@ -6,6 +6,7 @@ import {
   ManyToOne,
   OneToOne,
   OneToMany,
+  JoinColumn,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Ebooks } from "../ebooks/ebooks.entity";
@@ -19,8 +20,8 @@ export class OrderEbooks {
   @ManyToOne(() => Order)
   order: Order;
 
-  @OneToMany(() => Ebooks, (ebooks) => ebooks.orderEbooks)
-  ebooks: Ebooks;
+  @ManyToOne(() => Ebooks)
+  ebooks: Ebooks[];
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
