@@ -1,30 +1,31 @@
 import { Payment } from "../../entities/payment/payment.entity";
 import { AppError } from "../../errors/appError";
 import { IPaymentRequest } from "../../interfaces/payment.interface";
-import { paymentRepository } from "../../utils/repositories";
-import bcrypt from "bcryptjs"
+import { paymentRepository, userRepository } from "../../utils/repositories";
+import bcrypt from "bcryptjs";
 
-const createPaymentService = async ({cardName,numberCard,securityCode,expireDate}:IPaymentRequest,id:string) => {
-    
-    if(!cardName||!numberCard||!securityCode||!expireDate){
-        throw new AppError(400,"Information required for registration is missing")
-    }
-    
-    const numberCardCrypt = bcrypt.hashSync(String(numberCard),10)
-    const securityCodeCrypto = bcrypt.hashSync(securityCode,10)
-    
-    const newCard = new Payment()
-    newCard.cardName = cardName
-    newCard.numberCard = numberCardCrypt
-    securityCode = securityCodeCrypto
-    newCard.expireDate = expireDate
-    newCard.userId = id
+const createPaymentService = async (
+  { cardName, numberCard, securityCode, expireDate }: IPaymentRequest,
+  id: string
+) => {
+  if (!cardName || !numberCard || !securityCode || !expireDate) {
+    throw new AppError(400, "Information required for registration is missing");
+  }
 
-    paymentRepository.create(newCard)
-    await paymentRepository.save(newCard)
+  const numberCardCrypt = bcrypt.hashSync(String(numberCard), 10);
+  const securityCodeCrypto = bcrypt.hashSync(securityCode, 10);
 
-    return newCard
+  const newCard = new Payment();
+  newCard.cardName = cardName;
+  newCard.numberCard = numberCardCrypt;
+  securityCode = securityCodeCrypto;
+  newCard.expireDate = expireDate;
+  newCard.user = id;
 
-}
+  paymentRepository.create(newCard);
+  await paymentRepository.save(newCard);
 
-export default createPaymentService
+  return newCard;
+};
+
+export default createPaymentService;

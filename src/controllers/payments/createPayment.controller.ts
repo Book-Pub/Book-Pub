@@ -1,18 +1,22 @@
 import { Request, Response } from "express";
 import createPaymentService from "../../services/payments/createPayment.service";
-import jwt from "jsonwebtoken"
-const createPaymentController = async (req:Request,res:Response) => {
-    const token = req.headers.authorization!
+import jwt from "jsonwebtoken";
 
-    const decode = jwt.decode(token.slice(7))
+const createPaymentController = async (req: Request, res: Response) => {
+  const token = req.headers.authorization!;
 
-   const id = String(decode!.sub)
+  const decode = jwt.decode(token.slice(7));
 
-    const {numberCard,securityCode,expireDate,cardName} = req.payment
+  const id = String(decode!.sub);
 
-    const createPayment = await createPaymentService({cardName,numberCard,securityCode,expireDate},id)
+  const { numberCard, securityCode, expireDate, cardName } = req.payment;
 
-    return res.status(201).json({createPayment})
-}
+  const createPayment = await createPaymentService(
+    { cardName, numberCard, securityCode, expireDate },
+    id
+  );
 
-export default createPaymentController
+  return res.status(201).json({ createPayment });
+};
+
+export default createPaymentController;
