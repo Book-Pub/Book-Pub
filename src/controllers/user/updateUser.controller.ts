@@ -6,6 +6,6 @@ const updateUserController = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;
   const updatedUser = await updateUserService(id, { name, email, password });
 
-  return res.status(204).json({ message: "User Updated Successfully" });
+  return res.status(200).json({ message: "User Updated Successfully" });
 };
 export default updateUserController;
