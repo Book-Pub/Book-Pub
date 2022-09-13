@@ -15,6 +15,6 @@ export const appRoutes = (app: Express) => {
   app.use("/favorites", favoritesRoutes);
   app.use("/ebooks", eBooksRoutes);
   app.use("/categories", categoriesRoutes);
-  app.use("/order", orderRoutes);
+  app.use("/orders", orderRoutes);
   app.use("/authors", authorRoutes);
 };

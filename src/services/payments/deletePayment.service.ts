@@ -9,7 +9,7 @@ const deletePaymentService = async (id:string) => {
         throw new AppError(400,"Payment does not exists")
     }
 
-    await paymentRepository.softDelete(id)
+    await paymentRepository.delete(id)
 
     return "Payment Deleted"
 }
