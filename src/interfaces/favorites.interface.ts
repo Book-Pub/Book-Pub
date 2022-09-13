@@ -1,5 +1,4 @@
 export interface IFavoritesRequest {
-  user: string;
-  books: string;
-  products: string;
+  bookId: string;
+  userId: string;
 }
