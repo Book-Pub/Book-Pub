@@ -1,17 +1,16 @@
-import { AppError } from "../../errors/appError"
-import { paymentRepository } from "../../utils/repositories"
+import { AppError } from "../../errors/appError";
+import { paymentRepository } from "../../utils/repositories";
 
-const deletePaymentService = async (id:string) => {
+const deletePaymentService = async (id: string): Promise<Boolean> => {
+  const findPayment = await paymentRepository.findOneBy({ id: id });
 
-    const findPayment = await paymentRepository.findOneBy({id:id})
-
-    if(!findPayment){
-        throw new AppError(400,"Payment does not exists")
+  if (!findPayment) {
+    throw new AppError(400, "Payment does not exists");
+  }
+  
+    await paymentRepository.delete(id)
+    
+    return true 
     }
 
-    await paymentRepository.delete(id)
-
-    return "Payment Deleted"
-}
-
-export default deletePaymentService
+export default deletePaymentService;
