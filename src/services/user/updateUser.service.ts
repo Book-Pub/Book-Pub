@@ -7,7 +7,13 @@ const updateUserService = async (
   id: string,
   { name, email, password }: IUserUpdate
 ): Promise<boolean> => {
-  const user = await userRepository.findOne({ where: { id: id } });
+  if (!name && !email && !password) {
+    throw new AppError(400, "Not a key has been passed");
+  }
+
+  const users = await userRepository.find();
+  const user = users.find((user) => user.id === id);
+
   if (!user) {
     throw new AppError(404, "User not found!");
   }

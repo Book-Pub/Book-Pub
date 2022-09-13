@@ -18,26 +18,30 @@ userRoutes.post(
   "",
   handleSchemaUserCreate(userRequestSchema),
   createUserController
-); //cadastro de usuario
+);
+
 userRoutes.get(
   "",
   handleAuthMiddleware,
   adminAuthMiddleware,
   listUsersController
-); //listar todos os usuarios - SÓ ADMIN
+); 
+
 userRoutes.get("/profile/:id", handleAuthMiddleware, getOneUserController);
+
 userRoutes.delete(
   "/:id",
   handleAuthMiddleware,
   adminAuthMiddleware,
   deleteUserController
-); // deletar usuario - softdelete - SÓ ADMIN
+);
+
 userRoutes.patch("/:id", handleAuthMiddleware, updateUserController);
 
 userRoutes.patch(
   "/:id/address",
   handleAuthMiddleware,
   updateUserAddressController
-); // atualizar endereço de usuario
+);
 
 export default userRoutes;

@@ -1,6 +1,7 @@
 import { instanceToPlain } from "class-transformer";
 import { Request, Response } from "express";
 import listUsersService from "../../services/user/listUser.service";
+import { instanceToPlain } from "class-transformer";
 
 const listUsersController = async (req: Request, res: Response) => {
   const users = await listUsersService();
@@ -8,4 +9,3 @@ const listUsersController = async (req: Request, res: Response) => {
     return res.status(200).json(instanceToPlain(users));
 }
 export default listUsersController
-
