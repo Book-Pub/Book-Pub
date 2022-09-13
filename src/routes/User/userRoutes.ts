@@ -42,6 +42,6 @@ userRoutes.patch(
   "/:id/address",
   handleAuthMiddleware,
   updateUserAddressController
-); // atualizar endereço de usuario
+);
 
 export default userRoutes;

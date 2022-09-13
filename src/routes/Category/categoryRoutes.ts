@@ -36,3 +36,4 @@ categoriesRoutes.delete(
 ); // deletar categorias -- ADMIN
 
 export default categoriesRoutes;
+// alterar para ebooks linha 24
