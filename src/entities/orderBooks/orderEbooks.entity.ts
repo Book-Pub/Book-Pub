@@ -21,7 +21,7 @@ export class OrderEbooks {
   order: Order;
 
   @ManyToOne(() => Ebooks)
-  ebooks: Ebooks[];
+  ebooks: Ebooks;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

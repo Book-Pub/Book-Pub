@@ -8,6 +8,7 @@ import { Payment } from "../entities/payment/payment.entity";
 // import { PaymentCart } from "../entities/paymentCart/paymentCart.entity";
 import { User } from "../entities/users/user.entity";
 import { Order } from "../entities/order/order.entity";
+import { OrderEbooks } from "../entities/orderBooks/orderEbooks.entity";
 
 const userRepository = AppDataSource.getRepository(User);
 // const paymentCartRepository = AppDataSource.getRepository(PaymentCart);
@@ -18,6 +19,7 @@ const categoriesRepository = AppDataSource.getRepository(Categories);
 const orderRepository = AppDataSource.getRepository(Order);
 const authorRepository = AppDataSource.getRepository(Author);
 const addressRepository = AppDataSource.getRepository(Address);
+const orderEbooksRepository = AppDataSource.getRepository(OrderEbooks)
 
 export {
   userRepository,
@@ -29,4 +31,5 @@ export {
   orderRepository,
   authorRepository,
   addressRepository,
+  orderEbooksRepository
 };

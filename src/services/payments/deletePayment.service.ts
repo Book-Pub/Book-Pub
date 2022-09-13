@@ -7,10 +7,10 @@ const deletePaymentService = async (id: string): Promise<Boolean> => {
   if (!findPayment) {
     throw new AppError(400, "Payment does not exists");
   }
-
-  await paymentRepository.softDelete(id);
-
-  return true;
-};
+  
+    await paymentRepository.delete(id)
+    
+    return true 
+    }
 
 export default deletePaymentService;
