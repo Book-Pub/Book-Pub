@@ -53,10 +53,13 @@ export class Ebooks {
   @Column()
   isbn: string;
 
-  @ManyToOne(() => Favorites)
+  @OneToMany(() => Favorites, (favorites) => favorites.ebooks)
+  @JoinColumn()
   favorites: Favorites;
 
-  @OneToMany(() => OrderEbooks, (orderEbooks) => orderEbooks.ebooks, { eager: true })
+  @OneToMany(() => OrderEbooks, (orderEbooks) => orderEbooks.ebooks, {
+    eager: true,
+  })
   @JoinColumn()
   orderEbooks: OrderEbooks;
 

@@ -14,7 +14,7 @@ const authorRoutes = Router();
 
 authorRoutes.post(
   "",
-
+  handleSchemaAuthor(authorRequestSchema),
   handleAuthMiddleware,
   adminAuthMiddleware,
   createAuthorController

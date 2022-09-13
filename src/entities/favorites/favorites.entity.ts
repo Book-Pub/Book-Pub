@@ -17,11 +17,10 @@ export class Favorites {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @OneToMany(() => Ebooks, (ebooks) => ebooks.favorites, {
+  @ManyToOne(() => Ebooks, {
     eager: true,
     nullable: true,
   })
-  @JoinColumn()
   ebooks: Ebooks;
 
   @ManyToOne(() => User, { eager: true })
