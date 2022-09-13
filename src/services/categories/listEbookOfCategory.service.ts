@@ -1,4 +1,3 @@
-import { Categories } from "../../entities/category/category.entity";
 import { Ebooks } from "../../entities/ebooks/ebooks.entity";
 import { AppError } from "../../errors/appError";
 import { ICategoryIDRequest } from "../../interfaces/categories.interface";
@@ -7,7 +6,7 @@ import {
   ebooksRepository,
 } from "../../utils/repositories";
 
-const listProductsOfCategoryService = async ({
+const listEbookOfCategoryService = async ({
   id,
 }: ICategoryIDRequest): Promise<Ebooks[]> => {
   const categories = await categoriesRepository.find();
@@ -31,4 +30,4 @@ const listProductsOfCategoryService = async ({
   return ebooksByCategory;
 };
 
-export default listProductsOfCategoryService;
+export default listEbookOfCategoryService;
