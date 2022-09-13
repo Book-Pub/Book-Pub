@@ -5,37 +5,42 @@ import { AppError } from "../../errors/appError";
 import { User } from "../../entities/users/user.entity";
 
 const createUserService = async ({
-  name,
-  email,
-  address,
-  password,
-  isAdm,
-}: IUserRequest): Promise<User> => {
-  const users = await userRepository.find();
-
-  const userExists = users.find((user) => user.email === email);
-
-  if (userExists) {
-    throw new AppError(400, "User already exists");
-  }
-
-  const hashPassword = bcryptjs.hashSync(password, 10);
-
-  const newAddres = addressRepository.create({ ...address });
-
-  await addressRepository.save(newAddres);
-
-  const user = userRepository.create({
     name,
     email,
-    address: newAddres,
-    password: hashPassword,
+    address,
+    password,
     isAdm,
-  });
+}: IUserRequest): Promise<User> => {
+    const users = await userRepository.find();
+    const userExists = users.find((user) => user.email === email);
 
-  await userRepository.save(user);
+    if (userExists) {
+        throw new AppError(400, "User already exists!");
+    }
+    if (address.zipCode.length > 8) {
+        throw new AppError(400, "Invalid zipcode!");
+    }
+    if (address.state.length > 2) {
+        throw new AppError(400, "Invalid state!");
+    }
 
-  return user;
+    const hashPassword = bcryptjs.hashSync(password, 10);
+
+    const newAddres = addressRepository.create({ ...address });
+
+    await addressRepository.save(newAddres);
+
+    const user = userRepository.create({
+        name,
+        email,
+        address: newAddres,
+        password: hashPassword,
+        isAdm,
+    });
+
+    await userRepository.save(user);
+
+    return user;
 };
 
 export default createUserService;
