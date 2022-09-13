@@ -6,7 +6,7 @@ const deleteEbookController = async (req: Request, res: Response) => {
 
   const deleteUser = await deleteEbookService(id);
 
-  return res.status(204).json({
+  return res.status(200).json({
     message: "Ebook deleted from database",
   });
 };

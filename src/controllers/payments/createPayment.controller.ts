@@ -16,7 +16,7 @@ const createPaymentController = async (req: Request, res: Response) => {
     id
   );
 
-  return res.status(201).json({ createPayment });
+  return res.status(201).json(createPayment);
 };
 
 export default createPaymentController;

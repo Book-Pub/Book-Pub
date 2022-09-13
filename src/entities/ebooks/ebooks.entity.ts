@@ -56,7 +56,9 @@ export class Ebooks {
   @ManyToOne(() => Favorites)
   favorites: Favorites;
 
-  @OneToMany(() => OrderEbooks, (orderEbooks) => orderEbooks.ebooks, { eager: true })
+  @OneToMany(() => OrderEbooks, (orderEbooks) => orderEbooks.ebooks, {
+    eager: true,
+  })
   @JoinColumn()
   orderEbooks: OrderEbooks;
 

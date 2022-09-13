@@ -13,6 +13,6 @@ const updateUserAddressController = async (req: Request, res: Response) => {
     state,
   });
 
-  return res.status(204).json({ message: "Address Updated Successfully" });
+  return res.status(200).json({ message: "Address Updated Successfully" });
 };
 export default updateUserAddressController;
