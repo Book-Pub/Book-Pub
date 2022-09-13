@@ -5,9 +5,9 @@ const updateCategoryController = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name } = req.body;
 
-  const updatedCategory = await updateCategoryService({ id, name });
+  await updateCategoryService({ id, name });
 
-  return res.status(200).json(updatedCategory);
+  return res.status(200).json({ message: "Category Updated Successfully" });
 };
 
 export default updateCategoryController;

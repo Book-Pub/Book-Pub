@@ -18,22 +18,24 @@ categoriesRoutes.post(
   handleAuthMiddleware,
   adminAuthMiddleware,
   createCategoryController
-); //cadastrar uma Category -- SO ADMIN
+); 
 
-categoriesRoutes.get("", listAllCategoriesController); //listar todas as categorias
-categoriesRoutes.get("/:id/ebooks", listProductsOfCategoryController); //listar produtos de uma categoria
+categoriesRoutes.get("", listAllCategoriesController);
+
+categoriesRoutes.get("/:id/ebooks", listProductsOfCategoryController);
+
 categoriesRoutes.patch(
   "/:id",
   handleAuthMiddleware,
   adminAuthMiddleware,
   updateCategoryController
-); // atualizar Categorias -- SO ADMIN
+); 
 categoriesRoutes.delete(
   "/:id",
   handleAuthMiddleware,
   adminAuthMiddleware,
   deleteCategoryController
-); // deletar categorias -- ADMIN
+); 
 
 export default categoriesRoutes;
 // alterar para ebooks linha 24

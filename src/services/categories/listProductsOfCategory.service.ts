@@ -10,7 +10,11 @@ import {
 const listProductsOfCategoryService = async ({
   id,
 }: ICategoryIDRequest): Promise<Ebooks[]> => {
-  const categoryExists = await categoriesRepository.findOneBy({ id });
+  const categories = await categoriesRepository.find();
+
+  const categoryExists = categories.find(
+    (categoryExists) => categoryExists.id === id
+  );
 
   if (!categoryExists) {
     throw new AppError(404, "Category does not exist");
