@@ -35,9 +35,7 @@ const createEbooksController = async (req: Request, res: Response) => {
     value,
   });
 
-  return res.status(201).json({
-    eBook,
-  });
+  return res.status(201).json(eBook);
 };
 
 export default createEbooksController;

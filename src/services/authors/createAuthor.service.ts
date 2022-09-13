@@ -15,8 +15,6 @@ const createAuthorService = async ({
 
   const author = authorRepository.create({
     name,
-    createdAt: new Date(),
-    updatedAt: new Date(),
   });
 
   await authorRepository.save(author);

@@ -21,7 +21,7 @@ categoriesRoutes.post(
 ); //cadastrar uma Category -- SO ADMIN
 
 categoriesRoutes.get("", listAllCategoriesController); //listar todas as categorias
-categoriesRoutes.get("/:id/products", listProductsOfCategoryController); //listar produtos de uma categoria
+categoriesRoutes.get("/:id/ebooks", listProductsOfCategoryController); //listar produtos de uma categoria
 categoriesRoutes.patch(
   "/:id",
   handleAuthMiddleware,

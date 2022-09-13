@@ -5,11 +5,13 @@ const authorUpdateController = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name } = req.body;
 
-  await authorUpdateService({
+  const updatedAuthor = await authorUpdateService({
     name,
     id,
   });
-  return res.json({ message: "Author sucessfully updated" });
+  return res
+    .status(200)
+    .json({ message: "Author sucessfully updated", updatedAuthor });
 };
 
 export default authorUpdateController;
