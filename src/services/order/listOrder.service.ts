@@ -1,13 +1,13 @@
-import { orderRepository } from "../../utils/repositories"
+import { orderRepository } from "../../utils/repositories";
 
 const listOrderService = async () => {
-    const orderList = await orderRepository.find({
-        relations:{
-            orderEbooks:true
-        }
-    });
+  const orderList = await orderRepository.find({
+    relations: {
+      orderEbooks: true,
+    },
+  });
 
-    return {orderList}
-}
+  return { orderList };
+};
 
-export default listOrderService
+export default listOrderService;

@@ -10,7 +10,7 @@ const adminAuthMiddleware = async (
   const userAdmin = req.user.isAdm;
 
   if (!userAdmin) {
-    throw new AppError(403, "Unauthorized user");
+    throw new AppError(401, "Unauthorized user");
   }
 
   next();
