@@ -7,9 +7,9 @@ import handleAuthMiddleware from "../../middlewares/authentication.middleware";
 
 const orderRoutes = Router();
 
-orderRoutes.post("", handleAuthMiddleware,createOrderController)
-orderRoutes.get("", handleAuthMiddleware,listOrderController)
-orderRoutes.patch("/:id", handleAuthMiddleware,updateOrderController)
-orderRoutes.delete("/:id", handleAuthMiddleware,deleteOrderController)
+orderRoutes.post("", handleAuthMiddleware, createOrderController);
+orderRoutes.get("/:id", handleAuthMiddleware, listOrderController);
+orderRoutes.patch("/:id", handleAuthMiddleware, updateOrderController);
+orderRoutes.delete("/:id", handleAuthMiddleware, deleteOrderController);
 
 export default orderRoutes;

@@ -1,3 +1,4 @@
+import { Ebooks } from "../../entities/ebooks/ebooks.entity";
 import { AppError } from "../../errors/appError";
 import { IFavoritesRequest } from "../../interfaces/favorites.interface";
 import {
@@ -28,7 +29,13 @@ const addToFavoritesService = async ({ userId, bookId }: IFavoritesRequest) => {
 
   await favoritesRepository.save(newFavorite);
 
-  return newFavorite;
+  const returnFavorite = await favoritesRepository
+    .createQueryBuilder("favorites")
+    .innerJoinAndSelect(Ebooks, "ebooks", "ebooks.id = favorites.ebooks")
+    .where("favorites.id = :id", { id: newFavorite.id })
+    .getOne();
+
+  return returnFavorite;
 };
 
 export default addToFavoritesService;

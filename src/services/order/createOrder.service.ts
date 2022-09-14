@@ -1,44 +1,51 @@
-import { Order } from "../../entities/order/order.entity";
-import { OrderEbooks } from "../../entities/orderBooks/orderEbooks.entity";
 import { AppError } from "../../errors/appError";
 import { IOrderRequest } from "../../interfaces/order.interface";
-import { ebooksRepository, orderEbooksRepository, orderRepository, userRepository } from "../../utils/repositories";
+import {
+  ebooksRepository,
+  orderEbooksRepository,
+  orderRepository,
+  userRepository,
+} from "../../utils/repositories";
 
-const createOrderService = async ({ebooksId,userId}:IOrderRequest) => {
-    
-    if(!ebooksId){
-        throw new AppError(400,"Ebooks Id is required")
-    }
+const createOrderService = async ({ ebooksId, userId }: IOrderRequest) => {
+  const users = await userRepository.find();
 
-    const userFind = await userRepository.findOneBy({id:userId})
+  const userFind = users.find((user) => user.id === userId);
 
-    if(!userFind){
-        throw new AppError(400,"User not Found")
-    }
+  if (!userFind) {
+    throw new AppError(400, "User not Found");
+  }
 
-    const ebooksFind = await ebooksRepository.findOneBy({id:ebooksId})
+  const ebooksFind = await ebooksRepository.findOneBy({ id: ebooksId });
 
-    if(!ebooksFind){
-        throw new AppError(400,"Ebooks not found")
-    }
+  if (!ebooksFind) {
+    throw new AppError(400, "Ebooks not found");
+  }
 
-    
-    const newOrder = new Order()
-    newOrder.user = userFind
-    
-    const orderFind = await orderRepository.findOneBy({id:newOrder.id})
+  const newOrder = orderRepository.create({
+    user: userFind,
+  });
+  await orderRepository.save(newOrder);
 
-    
-    const newOrderEbook = new OrderEbooks()
-    newOrderEbook.ebooks = ebooksFind
-    newOrderEbook.order = newOrder
+  const newOrderEbook = orderEbooksRepository.create({
+    ebooks: ebooksFind,
+    order: newOrder,
+  });
 
-    await orderRepository.save(newOrder)
-    await orderEbooksRepository.save(newOrderEbook)
+  await orderEbooksRepository.save(newOrderEbook);
 
+  const { id, ebooks } = newOrderEbook;
 
-    return {newOrderEbook}
-    
-}
+  const ebookReturn = {
+    id: ebooks.id,
+    name: ebooks.name,
+    authorId: ebooks.author.id,
+    authorName: ebooks.author.name,
+    categoryId: ebooks.categories.id,
+    categoryName: ebooks.categories.name,
+  };
 
-export default createOrderService
+  return { OrderId: id, order: ebookReturn };
+};
+
+export default createOrderService;
