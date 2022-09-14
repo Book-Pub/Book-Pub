@@ -1,5 +1,3 @@
-import { Order } from "../../entities/order/order.entity";
-import { OrderEbooks } from "../../entities/orderBooks/orderEbooks.entity";
 import { AppError } from "../../errors/appError";
 import { IOrderRequest } from "../../interfaces/order.interface";
 import {
@@ -9,20 +7,16 @@ import {
   userRepository,
 } from "../../utils/repositories";
 
-const createOrderService = async (id: string, { ebooksId }: IOrderRequest) => {
-  if (!ebooksId) {
-    throw new AppError(400, "Ebooks Id is required");
-  }
-
+const createOrderService = async ({ ebooksId, userId }: IOrderRequest) => {
   const users = await userRepository.find();
-  const userFind = users.find((user) => user.id === id);
+
+  const userFind = users.find((user) => user.id === userId);
 
   if (!userFind) {
     throw new AppError(400, "User not Found");
   }
 
-  const ebooks = await ebooksRepository.find();
-  const ebooksFind = ebooks.find((ebook) => ebook.id === ebooksId);
+  const ebooksFind = await ebooksRepository.findOneBy({ id: ebooksId });
 
   if (!ebooksFind) {
     throw new AppError(400, "Ebooks not found");
@@ -31,19 +25,27 @@ const createOrderService = async (id: string, { ebooksId }: IOrderRequest) => {
   const newOrder = orderRepository.create({
     user: userFind,
   });
-
-  const orders = await orderRepository.find();
-  orders.find((order) => order.id === newOrder.id);
+  await orderRepository.save(newOrder);
 
   const newOrderEbook = orderEbooksRepository.create({
-    order: newOrder,
     ebooks: ebooksFind,
+    order: newOrder,
   });
 
-  await orderRepository.save(newOrder);
   await orderEbooksRepository.save(newOrderEbook);
 
-  return newOrder ;
+  const { id, ebooks } = newOrderEbook;
+
+  const ebookReturn = {
+    id: ebooks.id,
+    name: ebooks.name,
+    authorId: ebooks.author.id,
+    authorName: ebooks.author.name,
+    categoryId: ebooks.categories.id,
+    categoryName: ebooks.categories.name,
+  };
+
+  return { OrderId: id, order: ebookReturn };
 };
 
 export default createOrderService;

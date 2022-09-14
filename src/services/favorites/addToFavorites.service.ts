@@ -8,8 +8,8 @@ import {
 } from "../../utils/repositories";
 
 const addToFavoritesService = async ({ userId, bookId }: IFavoritesRequest) => {
-  const users = await userRepository.find();
-  const user = users.find((user) => user.id === userId);
+  const user = await userRepository.findOne({ where: { id: userId } });
+
   if (!user) {
     throw new AppError(404, "User not exists");
   }
@@ -28,12 +28,17 @@ const addToFavoritesService = async ({ userId, bookId }: IFavoritesRequest) => {
   });
 
   await favoritesRepository.save(newFavorite);
+
   const returnFavorite = await favoritesRepository
     .createQueryBuilder("favorites")
     .innerJoinAndSelect(Ebooks, "ebooks", "ebooks.id = favorites.ebooks")
     .where("favorites.id = :id", { id: newFavorite.id })
     .getOne();
 
+  return returnFavorite;
+};
+
+export default addToFavoritesService;
 
   return returnFavorite;
 };

@@ -16,13 +16,14 @@ orderRoutes.post(
   handleAuthMiddleware,
   createOrderController
 );
-orderRoutes.get("/:userid", handleAuthMiddleware, listOrderController);
+orderRoutes.get("/:id", handleAuthMiddleware, listOrderController);
+
 orderRoutes.patch(
   "/:id",
   handleAuthMiddleware,
   adminAuthMiddleware,
   updateOrderController
-);
+
 orderRoutes.delete("/:id", handleAuthMiddleware, deleteOrderController);
 
 export default orderRoutes;

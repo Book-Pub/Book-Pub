@@ -1,15 +1,23 @@
-import { orderRepository, userRepository } from "../../utils/repositories";
+import {
+  orderEbooksRepository,
+  orderRepository,
+} from "../../utils/repositories";
 
-const listOrderService = async (id: string) => {
-  const users = await userRepository.find();
-  const user = users.find((user) => user.id === id);
+const listOrderService = async (idOrder: string) => {
+  const orders = await orderRepository.find();
+  const orderId = orders.find((order) => order.id === idOrder);
 
-  const orderList = await orderRepository.find({
-    where: { user: user },
-    relations:{}
+  const orderReturn = await orderEbooksRepository.find({
+    where: {
+      order: orderId,
+    },
+    relations: {
+      ebooks: true,
+      order: false,
+    },
   });
 
-  return orderList;
+  return orderReturn;
 };
 
 export default listOrderService;

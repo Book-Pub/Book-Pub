@@ -7,6 +7,7 @@ import {
   OneToOne,
   ManyToMany,
   ManyToOne,
+  Column,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Ebooks } from "../ebooks/ebooks.entity";

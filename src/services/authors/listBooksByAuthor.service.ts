@@ -1,28 +1,22 @@
+import { Author } from "../../entities/author/author.entity";
 import { Ebooks } from "../../entities/ebooks/ebooks.entity";
 import { AppError } from "../../errors/appError";
 import { authorRepository, ebooksRepository } from "../../utils/repositories";
 
-const listEbooksByAuthorService = async (
-  idAuthor: string
-): Promise<Ebooks[]> => {
-  const author = await authorRepository.findOneBy({
-    id: idAuthor,
+const listEbooksByAuthorService = async (idAuthor: string): Promise<Author> => {
+  const author = await authorRepository.findOne({
+    where: {
+      id: idAuthor,
+    },
+    relations: {
+      ebooks: true,
+    },
   });
 
   if (!author) {
     throw new AppError(404, "Author not found!");
   }
-
-  const ebooksFromAuthor = await ebooksRepository.find({
-    where: {
-      author: author,
-    },
-  });
-
-  if (ebooksFromAuthor.length === 0) {
-    throw new AppError(404, "There's no books for this author");
-  }
-  return ebooksFromAuthor;
+  return author;
 };
 
 export default listEbooksByAuthorService;
