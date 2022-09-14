@@ -4,8 +4,9 @@ import { paymentRepository } from "../../utils/repositories";
 const deletePaymentService = async (id: string): Promise<void> => {
   const payments = await paymentRepository.find();
   const findPayment = payments.find((payment) => payment.id === id);
-
-  if (!findPayment) {
+console.log(findPayment)
+  
+if (!findPayment) {
     throw new AppError(400, "Payment does not exists");
   }
 
