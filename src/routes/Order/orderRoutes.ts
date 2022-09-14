@@ -16,7 +16,7 @@ orderRoutes.post(
   handleAuthMiddleware,
   createOrderController
 );
-orderRoutes.get("", handleAuthMiddleware, listOrderController);
+orderRoutes.get("/:userid", handleAuthMiddleware, listOrderController);
 orderRoutes.patch(
   "/:id",
   handleAuthMiddleware,

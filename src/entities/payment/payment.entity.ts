@@ -17,7 +17,7 @@ export class Payment {
 
   @OneToOne(() => User, { eager: true })
   @JoinColumn()
-  user: string;
+  user: User;
 
   @Column({ name: "card_name" })
   cardName: string;
