@@ -35,7 +35,7 @@ const createEbooksController = async (req: Request, res: Response) => {
     value,
   });
 
-  return res.status(201).json({ message: "Ebook Created Successfully", ebook });
+  return res.status(201).json({ message: "Ebook Created Successfully", ...ebook });
 };
 
 export default createEbooksController;
