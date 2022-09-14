@@ -3,11 +3,7 @@ import createPaymentService from "../../services/payments/createPayment.service"
 import jwt from "jsonwebtoken";
 
 const createPaymentController = async (req: Request, res: Response) => {
-  const token = req.headers.authorization!;
-
-  const decode = jwt.decode(token.slice(7));
-
-  const id = String(decode!.sub);
+  const id = req.user.id
 
   const { numberCard, securityCode, expireDate, cardName } = req.payment;
 
@@ -16,7 +12,7 @@ const createPaymentController = async (req: Request, res: Response) => {
     id
   );
 
-  return res.status(201).json(createPayment);
+  return res.status(201).json({message: "Payment Created Successfully", payment: createPayment});
 };
 
 export default createPaymentController;

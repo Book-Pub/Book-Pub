@@ -12,10 +12,43 @@ import { AppError } from "../../errors/appError";
 const updateEbookService = async (
   id: string,
   data: IbookUpdateRequest
-): Promise<Ebooks | null> => {
+): Promise<void> => {
+  const {
+    author,
+    bookCover,
+    category,
+    country,
+    dateRelease,
+    description,
+    editionNumber,
+    isbn,
+    language,
+    name,
+    numberPages,
+    publishingCompany,
+    value,
+  } = data;
+  if (
+    !author &&
+    !bookCover &&
+    !category &&
+    !country &&
+    !dateRelease &&
+    !description &&
+    !editionNumber &&
+    !isbn &&
+    !language &&
+    !name &&
+    !numberPages &&
+    !publishingCompany &&
+    !value
+  ) {
+    throw new AppError(400, "Not a key has been passed");
+  }
+
   const ebookExists = await ebooksRepository.findOneBy({ id });
   if (!ebookExists) {
-    throw new AppError(400, "Invalid ID");
+    throw new AppError(400, "User not found");
   }
 
   const ebooks = await ebooksRepository.find();
@@ -57,10 +90,6 @@ const updateEbookService = async (
     country: data.country ? data.country : ebookExists.country,
     isbn: data.isbn ? data.isbn : ebookExists.isbn,
   });
-
-  const ebookUpdated = ebooksRepository.findOneBy({ id });
-
-  return ebookUpdated;
 };
 
 export default updateEbookService;

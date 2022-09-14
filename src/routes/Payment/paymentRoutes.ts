@@ -14,7 +14,7 @@ paymentRoutes.post(
   handleAuthMiddleware,
   createPaymentController
 ); // atualizar metodo de pagamento de um usuario
-paymentRoutes.patch("/:id", handleAuthMiddleware,editPaymentController); // atualizar metodo de pagamento de um usuario
-paymentRoutes.delete("/:id", handleAuthMiddleware,deletePaymentController); // deletar metodo de pagamento de um usuário
+paymentRoutes.patch("/:id", handleAuthMiddleware, editPaymentController); // atualizar metodo de pagamento de um usuario
+paymentRoutes.delete("/:id", handleAuthMiddleware, deletePaymentController); // deletar metodo de pagamento de um usuário
 
 export default paymentRoutes;

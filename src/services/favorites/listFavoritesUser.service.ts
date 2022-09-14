@@ -1,9 +1,14 @@
-import { favoritesRepository } from "../../utils/repositories";
+import { Favorites } from "../../entities/favorites/favorites.entity";
+import { ebooksRepository } from "../../utils/repositories";
 
-const listFavoritesService = async () => {
-    const favorites = await favoritesRepository.find();
+const listFavoritesService = async (id: string) => {
+  const ebooks = await ebooksRepository
+    .createQueryBuilder("ebooks")
+    .innerJoinAndSelect(Favorites, "favorites", "favorites.ebooks = ebooks.id")
+    .where("favorites.user = :id", { id: id })
+    .getMany();
 
-    return favorites
+  return ebooks;
 };
 
 export default listFavoritesService;

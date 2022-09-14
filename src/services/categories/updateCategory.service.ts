@@ -6,36 +6,25 @@ import { categoriesRepository } from "../../utils/repositories";
 const updateCategoryService = async ({
   id,
   name,
-}: ICategoryUpdate): Promise<Categories | null> => {
-  if (!id) {
-    throw new AppError(400, "Invalid ID");
+}: ICategoryUpdate): Promise<void> => {
+  if (!id || !name) {
+    throw new AppError(400, "Not a key has been passed")
   }
-
-  if (!name) {
-    throw new AppError(400, "Invalid name");
-  }
-
-  const categoryExistsbyID = categoriesRepository.findOneBy({ id });
-
-  if (!categoryExistsbyID) {
-    throw new AppError(400, "Invalid Category");
-  }
-
+  
   const categories = await categoriesRepository.find();
 
-  const categoryExistsByName = categories.find(
-    (category) => category.name === name
-  );
+  const categoryExist = categories.find(category => category.id === id)
+  
+  if (!categoryExist) {
+    throw new AppError(400, "Category does not exist");
+  }
 
-  if (categoryExistsByName) {
+  if (categoryExist.name === name) {
     throw new AppError(400, "Category name already exists");
   }
 
   await categoriesRepository.update(id, { name });
 
-  const updatedCategory = categoriesRepository.findOneBy({ id });
-
-  return updatedCategory;
 };
 
 export default updateCategoryService;
