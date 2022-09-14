@@ -18,7 +18,7 @@ categoriesRoutes.post(
   handleAuthMiddleware,
   adminAuthMiddleware,
   createCategoryController
-); 
+);
 
 categoriesRoutes.get("", listAllCategoriesController);
 
@@ -29,13 +29,12 @@ categoriesRoutes.patch(
   handleAuthMiddleware,
   adminAuthMiddleware,
   updateCategoryController
-); 
+);
 categoriesRoutes.delete(
   "/:id",
   handleAuthMiddleware,
   adminAuthMiddleware,
   deleteCategoryController
-); 
+);
 
 export default categoriesRoutes;
-// alterar para ebooks linha 24

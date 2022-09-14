@@ -1,9 +1,9 @@
 import * as yup from "yup";
 
 import { SchemaOf } from "yup";
-import { ICartRequest } from "../interfaces/cart.interface";
+import { IOrderRequest } from "../interfaces/order.interface";
 
-export const cartRequestSchema: SchemaOf<ICartRequest> = yup.object().shape({
-  name: yup.string().required(),
-  totalValue: yup.number().required(),
+export const orderRequestSchema: SchemaOf<IOrderRequest> = yup.object().shape({
+  ebooksId: yup.string().required(),
+  userId: yup.string().required(),
 });

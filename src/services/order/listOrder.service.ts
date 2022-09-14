@@ -7,7 +7,7 @@ const listOrderService = async () => {
     },
   });
 
-  return { orderList };
+  return orderList;
 };
 
 export default listOrderService;

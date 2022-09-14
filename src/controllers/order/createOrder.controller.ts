@@ -1,19 +1,20 @@
-import { Request, Response } from "express"
-import jwt from "jsonwebtoken"
+import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
 import createOrderService from "../../services/order/createOrder.service";
-const createOrderController = async(req:Request,res:Response) => {
-    const token = req.headers.authorization!
-    
-    const {ebooksId} = req.body;
-    
-    const decode = jwt.decode(token.slice(7));
+const createOrderController = async (req: Request, res: Response) => {
+  const token = req.headers.authorization!;
 
-    const userId = String(decode!.sub);
+  const { ebooksId } = req.order;
 
-    const create = await createOrderService({ebooksId,userId})
+  const decode = jwt.decode(token.slice(7));
 
-    return res.status(201).json(create)
+  const userId = String(decode!.sub);
 
-}
+  const create = await createOrderService({ ebooksId, userId });
 
-export default createOrderController
+  return res
+    .status(201)
+    .json({ message: "order created successfully", order: create });
+};
+
+export default createOrderController;

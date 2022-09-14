@@ -6,11 +6,9 @@ const updateEbookController = async (req: Request, res: Response) => {
   const { id } = req.params;
   const data = req.body;
 
-  const updatedEbook = await updateEbookService(id, data);
+  await updateEbookService(id, data);
 
-  return res.status(200).json({
-    updatedEbook,
-  });
+  return res.status(200).json({ message: "Category Updated Successfully" });
 };
 
 export default updateEbookController;
