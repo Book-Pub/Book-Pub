@@ -8,7 +8,7 @@ const createCategoryController = async (req: Request, res: Response) => {
 
   return res
     .status(201)
-    .json({ message: "category created successfully", category });
+    .json({ message: "category created successfully", ...category });
 };
 
 export default createCategoryController;

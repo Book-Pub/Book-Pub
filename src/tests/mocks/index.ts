@@ -1,4 +1,10 @@
+import { IAuthorRequest } from "../../interfaces/author.interface";
+import { ICategoriesRequest } from "../../interfaces/categories.interface";
+import { IBookRequest } from "../../interfaces/ebooks.interface";
+import { IFavoritesRequest } from "../../interfaces/favorites.interface";
 import { IUserLogin } from "../../interfaces/login.interface";
+import { IOrderRequest } from "../../interfaces/order.interface";
+import { IPaymentRequest } from "../../interfaces/payment.interface";
 import { IAddressUpdate, IUserRequest, IUserUpdate } from "../../interfaces/users.interface";
 
 export const mockedUser : IUserRequest = {
@@ -49,6 +55,7 @@ export const mockedUserUpdate : IUserUpdate = {
 
 }
 
+
 export const mockedUserNotExists : IUserUpdate = {
   name: "Flavinho do Pneu",
   email:"flavin@kenzie.com",
@@ -63,4 +70,44 @@ export const mockedUserUpdateAddress : IAddressUpdate = {
   number: "123",
   city: "California",
   state: "US"
+}
+
+export const mockedEbook : IBookRequest = {
+    name: "Harry Potter",
+    dateRelease: "23/09/2001",
+    bookCover: "https://m.media-amazon.com/images/M/MV5BMzkyZGFlOWQtZjFlMi00N2YwLWE2OWQtYTgxY2NkNmM1NjMwXkEyXkFqcGdeQXVyNjY1NTM1MzA@._V1_UY1200_CR90,0,630,1200_AL_.jpg",
+    value: 29.99,
+    description: "Harry bla, faz mto bla",
+    language: "PortuBla",
+    editionNumber: "2v",
+    numberPages: "700pages",
+    country: "Brasil",
+    isbn: "223werdfcdr345234",
+    author: "",
+		category: "",
+		publishingCompany: "23d",
+}
+
+export const mockedAuthor : IAuthorRequest = {
+  name: "J.K Rowling"
+}
+
+export const mockedCategory : ICategoriesRequest = {
+    name: "Magic"
+}
+
+export const mockedOrder : IOrderRequest = {
+    ebooksId: ""
+}
+
+export const mockedFavorites : IFavoritesRequest = {
+    bookId: "",
+    userId: ""
+}
+
+export const mockedPayment : IPaymentRequest = {
+    cardName :"213",
+    numberCard :"233",
+    expireDate :"2323",
+    securityCode :"123"
 }

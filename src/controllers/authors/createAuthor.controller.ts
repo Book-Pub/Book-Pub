@@ -6,7 +6,7 @@ const createAuthorController = async (req: Request, res: Response) => {
   const author = await createAuthorService({ name });
   return res
     .status(201)
-    .json({ message: "Author Created Successfully", author });
+    .json({ message: "Author Created Successfully", ...author });
 };
 
 export default createAuthorController;

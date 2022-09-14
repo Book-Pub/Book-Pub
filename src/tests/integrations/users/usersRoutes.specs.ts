@@ -94,7 +94,7 @@ describe("Testing the user and login routes", () => {
         const login = await Request(app).post("/login").send(mockedUserLoginNotAdm);
         const response = await Request(app).get("/users").set("Authorization",`Bearer ${login.body.token}`);
 
-        expect(response.status).toBe(403)
+        expect(response.status).toBe(401)
 
         expect(response.body).toHaveProperty("message")
       });
@@ -146,7 +146,7 @@ describe("Testing the user and login routes", () => {
     test("Should be able to update a user created", async () => {
       const login = await Request(app).post("/login").send(mockedUserLoginAdm);
       const User = await Request(app).get("/users").set("Authorization",`Bearer ${login.body.token}`);
-      const response = await Request(app).patch(`/users/${User.body[0].id}`).set("Authorization",`Bearer ${login.body.token}`)
+      const response = await Request(app).patch(`/users/${User.body[1].id}`).set("Authorization",`Bearer ${login.body.token}`)
       .send(mockedUserUpdate);
       
       expect(response.status).toBe(200)
@@ -160,7 +160,7 @@ describe("Testing the user and login routes", () => {
         const response = await Request(app).delete(`/users/${User.body.id}`).set("Authorization",`Bearer ${login.body.token}`)
         .send(mockedUserUpdate);
         
-        expect(response.status).toBe(403)
+        expect(response.status).toBe(401)
         expect(response.body).toHaveProperty("message")
         
     });
