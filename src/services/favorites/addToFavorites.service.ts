@@ -39,3 +39,8 @@ const addToFavoritesService = async ({ userId, bookId }: IFavoritesRequest) => {
 };
 
 export default addToFavoritesService;
+
+  return returnFavorite;
+};
+
+export default addToFavoritesService;

@@ -9,6 +9,7 @@ import { IBookRequest } from "../../interfaces/ebooks.interface";
 import { ICategoriesRequest } from "../../interfaces/categories.interface";
 import { ICartRequest } from "../../interfaces/cart.interface";
 import { IAuthorRequest } from "../../interfaces/author.interface copy";
+import { IOrderRequest } from "../../interfaces/order.interface";
 
 declare global {
   namespace Express {
@@ -26,6 +27,7 @@ declare global {
       categories: ICategoriesRequest;
       cart: ICartRequest;
       author: IAuthorRequest;
+      order: IOrderRequest;
     }
   }
 }

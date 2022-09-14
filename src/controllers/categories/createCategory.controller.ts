@@ -6,9 +6,9 @@ const createCategoryController = async (req: Request, res: Response) => {
 
   const category = await createCategoryService({ name });
 
-  return res.status(201).json({
-    category,
-  });
+  return res
+    .status(201)
+    .json({ message: "category created successfully", ...category });
 };
 
 export default createCategoryController;

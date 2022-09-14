@@ -1,4 +1,4 @@
-import { instanceToPlain } from "class-transformer";
+
 import { Request, Response } from "express";
 
 import removeEbookService from "../../services/favorites/removeEbookFavorites.service";

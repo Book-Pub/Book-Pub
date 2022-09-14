@@ -9,12 +9,12 @@ import sessionRoutes from "./Session/sessionRoutes";
 import userRoutes from "./User/userRoutes";
 
 export const appRoutes = (app: Express) => {
-  app.use("/users", userRoutes);
-  app.use("/login", sessionRoutes);
   app.use("/payment", paymentRoutes);
   app.use("/favorites", favoritesRoutes);
-  app.use("/ebooks", eBooksRoutes);
-  app.use("/categories", categoriesRoutes);
   app.use("/orders", orderRoutes);
+  app.use("/ebooks", eBooksRoutes);
+  app.use("/users", userRoutes);
+  app.use("/login", sessionRoutes);
+  app.use("/categories", categoriesRoutes);
   app.use("/authors", authorRoutes);
 };

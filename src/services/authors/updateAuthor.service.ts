@@ -6,20 +6,25 @@ import { authorRepository } from "../../utils/repositories";
 const authorUpdateService = async ({
   name,
   id,
-}: IAuthorUpdate): Promise<Author | null> => {
-  const authors = await authorRepository.findOneBy({ id });
+}: IAuthorUpdate): Promise<void> => {
+  if (!name) {
+    throw new AppError(400, "Not a key has been passed");
+  }
+  const authors = await authorRepository.find();
+  const author = authors.find((author) => author.id === id);
+  const authorName = authors.find((author) => author.name === name);
 
-  if (!authors) {
+  if (!author) {
     throw new AppError(403, "Author not found");
   }
 
-  const updatedAuthor = await authorRepository.update(id, {
-    name: name ? name : authors.name,
+  if (authorName?.name === name) {
+    throw new AppError(409, "Author already exists");
+  }
+
+  await authorRepository.update(id, {
+    name: name ? name : author.name,
   });
-
-  const returnUpdatedAuthor = authorRepository.findOneBy({ id });
-
-  return returnUpdatedAuthor;
 };
 
 export default authorUpdateService;

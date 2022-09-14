@@ -25,16 +25,9 @@ userRoutes.get(
   handleAuthMiddleware,
   adminAuthMiddleware,
   listUsersController
-); 
+);
 
 userRoutes.get("/profile/:id", handleAuthMiddleware, getOneUserController);
-
-userRoutes.delete(
-  "/:id",
-  handleAuthMiddleware,
-  adminAuthMiddleware,
-  deleteUserController
-);
 
 userRoutes.patch("/:id", handleAuthMiddleware, updateUserController);
 
@@ -42,6 +35,13 @@ userRoutes.patch(
   "/:id/address",
   handleAuthMiddleware,
   updateUserAddressController
+);
+
+userRoutes.delete(
+  "/:id",
+  handleAuthMiddleware,
+  adminAuthMiddleware,
+  deleteUserController
 );
 
 export default userRoutes;

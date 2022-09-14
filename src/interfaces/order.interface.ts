@@ -1,6 +1,6 @@
 export interface IOrderRequest{
     ebooksId: string,
-    userId: string
+
 }
 
 export interface IOrderUpdate{

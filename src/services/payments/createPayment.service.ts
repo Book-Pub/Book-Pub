@@ -8,8 +8,14 @@ const createPaymentService = async (
   { cardName, numberCard, securityCode, expireDate }: IPaymentRequest,
   id: string
 ): Promise<Payment> => {
-  if (!cardName || !numberCard || !securityCode || !expireDate) {
-    throw new AppError(400, "Information required for registration is missing");
+  const users = await userRepository.find();
+  const user = users.find((user) => user.id === id);
+
+  const payments = await paymentRepository.find();
+  const payment = payments.find((payment) => payment.user.id === id);
+
+  if (payment) {
+    throw new AppError(409, "Payment Already Exists");
   }
 
   const numberCardCrypt = bcrypt.hashSync(String(numberCard), 10);
@@ -18,7 +24,7 @@ const createPaymentService = async (
     cardName: cardName,
     numberCard: numberCardCrypt,
     expireDate: expireDate,
-    user: id,
+    user: user,
   });
 
   await paymentRepository.save(createdPayment);

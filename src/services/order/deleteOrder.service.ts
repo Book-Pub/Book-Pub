@@ -12,7 +12,7 @@ const deleteOrderService = async({id}:IOrderDelete) => {
     await orderEbooksRepository.delete(findOrder!.orderEbooks[0].id)
     await orderRepository.delete(id)
 
-    return "User Deleted"
+  
 }
 
 export default deleteOrderService

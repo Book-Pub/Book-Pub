@@ -2,14 +2,13 @@ import { AppError } from "../../errors/appError";
 import { IPaymentUpdate } from "../../interfaces/payment.interface";
 import { paymentRepository } from "../../utils/repositories";
 import bcrypt from "bcryptjs";
-import { Payment } from "../../entities/payment/payment.entity";
+
 const editPaymentService = async (
   { numberCard, expireDate, cardName }: IPaymentUpdate,
   id: string
-): Promise<object> => {
-  const findPayment = await paymentRepository.findOneBy({
-    id: id,
-  });
+): Promise<void> => {
+  const payments = await paymentRepository.find();
+  const findPayment = payments.find((payment) => payment.id === id);
 
   if (!findPayment) {
     throw new AppError(400, "Payment does not exists");
@@ -23,8 +22,6 @@ const editPaymentService = async (
   };
 
   await paymentRepository.update(id, updatePayment);
-
-  return updatePayment;
 };
 
 export default editPaymentService;

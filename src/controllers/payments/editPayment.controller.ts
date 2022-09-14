@@ -5,12 +5,9 @@ const editPaymentController = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { cardName, expireDate, numberCard } = req.body;
 
-  const edit = await editPaymentService(
-    { numberCard, expireDate, cardName },
-    id
-  );
-  // colocar somente a msg de update
-  return res.status(200).json(edit);
+  await editPaymentService({ numberCard, expireDate, cardName }, id);
+
+  return res.status(200).json({ message: "Payment Updated Successfully" });
 };
 
 export default editPaymentController;

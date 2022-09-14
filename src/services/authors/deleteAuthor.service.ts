@@ -2,16 +2,14 @@ import { AppError } from "../../errors/appError";
 import { IAuthorId } from "../../interfaces/author.interface";
 import { authorRepository } from "../../utils/repositories";
 
-const deleteAuthorService = async ({ id }: IAuthorId): Promise<Boolean> => {
-  const author = await authorRepository.find();
-  const account = author.find((user) => user.id === id);
-  if (!account) {
+const deleteAuthorService = async ({ id }: IAuthorId): Promise<void> => {
+  const authors = await authorRepository.find();
+  const author = authors.find((user) => user.id === id);
+  if (!author) {
     throw new AppError(404, "Author not found!");
   }
 
-  await authorRepository.delete(account!.id);
-
-  return true;
+  await authorRepository.delete(author!.id);
 };
 
 export default deleteAuthorService;

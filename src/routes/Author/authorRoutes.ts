@@ -18,28 +18,24 @@ authorRoutes.post(
   handleAuthMiddleware,
   adminAuthMiddleware,
   createAuthorController
-); //cadastrar um Autor -- SO ADMIN
+);
 
-authorRoutes.get("", listAuthorsController); //listar todos os Autores
+authorRoutes.get("", listAuthorsController);
 
-authorRoutes.get("/:id/books", listEbooksbyAuthorController); //listar os livros do autor -- ID DO AUTOR
+authorRoutes.get("/:id/books", listEbooksbyAuthorController); 
 
 authorRoutes.patch(
   "/:id",
   handleAuthMiddleware,
   adminAuthMiddleware,
   authorUpdateController
-); // atualizar autor -- SO ADMIN
+);
 
 authorRoutes.delete(
   "/:id",
   handleAuthMiddleware,
   adminAuthMiddleware,
   deleteAuthorController
-); // deletar autor -- SO ADMIN
-
-handleSchemaAuthor(authorRequestSchema),
-  handleAuthMiddleware,
-  adminAuthMiddleware; //cadastrar um Autor -- SO ADMIN
+);
 
 export default authorRoutes;
