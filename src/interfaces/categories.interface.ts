@@ -1,8 +1,3 @@
-
-export interface ICategoriesRequest {
-  name: string;
-}
-
 interface ICategoriesRequest {
   name: string;
 }
