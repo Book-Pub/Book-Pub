@@ -5,7 +5,7 @@ const createOrderController = async (req: Request, res: Response) => {
   const { ebooksId } = req.order;
   const id = req.user.id;
 
-  const create = await createOrderService(id,{ ebooksId});
+  const create = await createOrderService(id, { ebooksId });
 
   return res
     .status(201)

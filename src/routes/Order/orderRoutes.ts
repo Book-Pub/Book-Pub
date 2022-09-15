@@ -23,6 +23,7 @@ orderRoutes.patch(
   handleAuthMiddleware,
   adminAuthMiddleware,
   updateOrderController
+);
 
 orderRoutes.delete("/:id", handleAuthMiddleware, deleteOrderController);
 

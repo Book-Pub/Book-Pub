@@ -7,7 +7,10 @@ import {
   userRepository,
 } from "../../utils/repositories";
 
-const createOrderService = async ({ ebooksId, userId }: IOrderRequest) => {
+const createOrderService = async (
+  userId: string,
+  { ebooksId }: IOrderRequest
+) => {
   const users = await userRepository.find();
 
   const userFind = users.find((user) => user.id === userId);
