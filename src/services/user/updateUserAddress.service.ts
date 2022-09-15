@@ -6,10 +6,18 @@ const updateUserAddressService = async (
   id: string,
   { streetName, district, number, zipCode, city, state }: IAddressUpdate
 ): Promise<boolean> => {
-  const user = await userRepository.findOne({ where: { id: id } });
+  if (!streetName && !district && !number && !zipCode && !city && !state) {
+    throw new AppError(400, "Not a key has been passed");
+  }
+
+  const users = await userRepository.find();
+
+  const user = users.find((user) => user.id === id);
+
   if (!user) {
     throw new AppError(404, "User not found!");
   }
+
   const address = await addressRepository.findOne({
     where: { id: user.address.id },
   });

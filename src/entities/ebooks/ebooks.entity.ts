@@ -5,12 +5,15 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   Column,
+  JoinColumn,
+  OneToMany,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Author } from "../author/author.entity";
-import { Cart } from "../cart/cart.entity";
 import { Categories } from "../category/category.entity";
 import { Favorites } from "../favorites/favorites.entity";
+import { Order } from "../order/order.entity";
+import { OrderEbooks } from "../orderBooks/orderEbooks.entity";
 
 @Entity("ebooks")
 export class Ebooks {
@@ -50,11 +53,15 @@ export class Ebooks {
   @Column()
   isbn: string;
 
-  @ManyToOne(() => Favorites)
+  @OneToMany(() => Favorites, (favorites) => favorites.ebooks)
+  @JoinColumn()
   favorites: Favorites;
 
-  @ManyToOne(() => Cart)
-  cart: Cart;
+  @OneToMany(() => OrderEbooks, (orderEbooks) => orderEbooks.ebooks, {
+    eager: true,
+  })
+  @JoinColumn()
+  orderEbooks: OrderEbooks;
 
   @ManyToOne(() => Author, { eager: true })
   author: Author;

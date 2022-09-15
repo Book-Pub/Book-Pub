@@ -22,22 +22,6 @@ const createEbooksService = async ({
   country,
   isbn,
 }: IBookRequest): Promise<Ebooks> => {
-  if (
-    !author ||
-    !name ||
-    !category ||
-    !dateRelease ||
-    !value ||
-    !description ||
-    !publishingCompany ||
-    !language ||
-    !numberPages ||
-    !country ||
-    !isbn
-  ) {
-    throw new AppError(400, "Information required for registration is missing");
-  }
-
   const authorAlreadyExists = await authorRepository.findOneBy({ id: author });
 
   if (!authorAlreadyExists) {

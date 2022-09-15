@@ -12,7 +12,7 @@ import { Ebooks } from "../ebooks/ebooks.entity";
 @Entity("author")
 export class Author {
   @PrimaryGeneratedColumn("uuid")
-  readonly id: string;
+  id: string;
 
   @Column()
   name: string;

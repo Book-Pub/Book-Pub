@@ -4,15 +4,15 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Address } from "../address/address.entity";
-import { Cart } from "../cart/cart.entity";
 import { Favorites } from "../favorites/favorites.entity";
-import { Payment } from "../payment/payment.entity";
+import { Order } from "../order/order.entity";
 
 @Entity("users")
 export class User {
@@ -45,17 +45,13 @@ export class User {
   @JoinColumn()
   address: Address;
 
-  @OneToOne(() => Favorites, { eager: true })
+  @OneToMany(() => Favorites, (favorites) => favorites.user)
   @JoinColumn()
   favorites: Favorites;
 
-  @OneToOne(() => Payment, { eager: true })
+  @OneToMany(() => Order, (order) => order.user)
   @JoinColumn()
-  payment: Payment;
-
-  @OneToOne(() => Cart, { eager: true })
-  @JoinColumn()
-  cart: Cart;
+  order: Order;
 
   constructor() {
     if (!this.id) {

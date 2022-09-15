@@ -3,5 +3,5 @@ export default {
 
   preset: "ts-jest",
 
-  testMatch: ["**/**/*.spec.ts"],
+  testMatch: ["**/tests/integrations/**/*.[jt]s?(x)"],
 };

@@ -3,17 +3,28 @@ import { AppError } from "../../errors/appError";
 import { IAuthorUpdate } from "../../interfaces/author.interface";
 import { authorRepository } from "../../utils/repositories";
 
-const authorUpdateService = async ({ name, id }: IAuthorUpdate) => {
-  const authors = await authorRepository.findOneBy({ id });
-  if (!authors) {
+const authorUpdateService = async ({
+  name,
+  id,
+}: IAuthorUpdate): Promise<void> => {
+  if (!name) {
+    throw new AppError(400, "Not a key has been passed");
+  }
+  const authors = await authorRepository.find();
+  const author = authors.find((author) => author.id === id);
+  const authorName = authors.find((author) => author.name === name);
+
+  if (!author) {
     throw new AppError(403, "Author not found");
   }
 
-  authors.name = name || authors.name;
-  authors.updatedAt = new Date();
+  if (authorName?.name === name) {
+    throw new AppError(409, "Author already exists");
+  }
 
-  await authorRepository.save(authors);
-  return authors;
+  await authorRepository.update(id, {
+    name: name ? name : author.name,
+  });
 };
 
 export default authorUpdateService;

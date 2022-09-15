@@ -9,7 +9,7 @@ const authorUpdateController = async (req: Request, res: Response) => {
     name,
     id,
   });
-  return res.json({ message: "Author sucessfully updated" });
+  return res.status(200).json({ message: "Author sucessfully updated" });
 };
 
 export default authorUpdateController;

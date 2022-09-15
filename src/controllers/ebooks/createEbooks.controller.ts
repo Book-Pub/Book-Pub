@@ -19,7 +19,7 @@ const createEbooksController = async (req: Request, res: Response) => {
     value,
   }: IBookRequest = req.body;
 
-  const eBook = await createEbooksService({
+  const ebook = await createEbooksService({
     author,
     bookCover,
     category,
@@ -35,9 +35,7 @@ const createEbooksController = async (req: Request, res: Response) => {
     value,
   });
 
-  return res.status(201).json({
-    eBook,
-  });
+  return res.status(201).json({ message: "Ebook Created Successfully", ...ebook });
 };
 
 export default createEbooksController;

@@ -2,29 +2,31 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinColumn,
+  OneToOne,
 } from "typeorm";
-import { PaymentCart } from "../paymentCart/paymentCart.entity";
 import { v4 as uuid } from "uuid";
+import { User } from "../users/user.entity";
 
 @Entity("payment")
 export class Payment {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
+  @OneToOne(() => User, { eager: true })
+  @JoinColumn()
+  user: User;
+
   @Column({ name: "card_name" })
   cardName: string;
 
-  @Column({ name: "security_code", nullable: true })
-  securityCode: number;
+  @Column({ name: "number_card" })
+  numberCard: string;
 
   @Column({ name: "expire_date" })
   expireDate: string;
-
-  @OneToMany(() => PaymentCart, (paymentCart) => paymentCart.payment)
-  paymentCart: PaymentCart;
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;

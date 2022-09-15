@@ -4,9 +4,9 @@ import deleteCategoryService from "../../services/categories/deleteCategory.serv
 const deleteCategoryController = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const deleteCategory = await deleteCategoryService({ id });
+  await deleteCategoryService({ id });
 
-  return res.status(204).json({
+  return res.status(200).json({
     message: "Category deleted from database",
   });
 };

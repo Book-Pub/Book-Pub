@@ -1,10 +1,10 @@
 {
-  "name": "apiunibook",
+  "name": "apibookpub",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --ignore-watch node_modules src/server.ts",
+    "dev": "ts-node-dev --poll --ignore-watch node_modules src/server.ts",
     "build": "tsc",
     "typeorm": "typeorm-ts-node-commonjs",
     "test": "NODE_ENV=test jest",

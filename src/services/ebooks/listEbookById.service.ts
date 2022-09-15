@@ -6,7 +6,7 @@ const listEbooksByIdService = async (id: string): Promise<Ebooks> => {
   const ebook = await ebooksRepository.findOneBy({ id });
 
   if (!ebook) {
-    throw new AppError(400, "Invalid ID");
+    throw new AppError(404, "User not found");
   }
 
   return ebook;

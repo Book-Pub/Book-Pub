@@ -8,15 +8,14 @@ const createAuthorService = async ({
 }: IAuthorRequest): Promise<Author> => {
   const nameAuthor = await authorRepository.find();
 
-  const nameAlreadyExists = nameAuthor.find((user) => user.name === name);
+  const nameAlreadyExists = nameAuthor.find((author) => author.name === name);
+  
   if (nameAlreadyExists) {
     throw new AppError(400, "Author already exists");
   }
 
   const author = authorRepository.create({
     name,
-    createdAt: new Date(),
-    updatedAt: new Date(),
   });
 
   await authorRepository.save(author);
