@@ -18,7 +18,7 @@ const handleAuthMiddleware = async (
 
   jwt.verify(
     token,
-    process.env.SECRET_KEY as string,
+    (process.env.SECRET_KEY as string) || "SECRET_KEY",
     (error: any, decoded: any) => {
       if (error) {
         return res.status(401).json({
